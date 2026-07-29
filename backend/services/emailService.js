@@ -6,9 +6,8 @@ let resendClient = null;
 const getResendClient = () => {
   if (!resendClient) {
     const apiKey = process.env.RESEND_API_KEY;
-    if (!apiKey || apiKey === 'YOUR_RESEND_API_KEY') {
-      logger.warn('RESEND_API_KEY is not configured in server environment.');
-      return null;
+    if (!apiKey || apiKey === 'YOUR_RESEND_API_KEY' || apiKey.startsWith('YOUR_')) {
+      throw new Error('RESEND_API_KEY environment variable is missing or invalid in .env.');
     }
     resendClient = new Resend(apiKey);
   }
@@ -27,11 +26,6 @@ export const sendEmail = async ({ to, subject, html, text }) => {
   try {
     const resend = getResendClient();
     const fromAddress = process.env.EMAIL_FROM || 'onboarding@resend.dev';
-
-    if (!resend) {
-      logger.warn(`Simulating email send to ${to} (Subject: "${subject}") - RESEND_API_KEY not configured.`);
-      return { success: false, simulated: true, message: 'Resend API key not configured' };
-    }
 
     const response = await resend.emails.send({
       from: fromAddress,

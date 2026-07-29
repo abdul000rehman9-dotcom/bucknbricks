@@ -7,9 +7,8 @@ let aiClient = null;
 const getGenAIClient = () => {
   if (!aiClient) {
     const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      logger.warn('GEMINI_API_KEY is missing for Chatbot module. Will use rule-based knowledge fallback.');
-      return null;
+    if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY' || apiKey.startsWith('YOUR_')) {
+      throw new Error('GEMINI_API_KEY environment variable is missing or invalid in .env.');
     }
     aiClient = new GoogleGenAI({ apiKey });
   }
@@ -133,16 +132,10 @@ const getFallbackChatResponse = (userMessage, jobs, websiteKnowledge) => {
 };
 
 /**
- * Generate Chatbot response using Gemini API or safe fallback
+ * Generate Chatbot response using Gemini API
  */
 export const generateChatReplyWithGemini = async (userMessage, history = [], jobs = [], websiteKnowledge = {}) => {
   const ai = getGenAIClient();
-
-  // If AI client is unconfigured, use intelligent rule-based knowledge response immediately
-  if (!ai) {
-    logger.debug('Using intelligent fallback chatbot response (API key not present).');
-    return getFallbackChatResponse(userMessage, jobs, websiteKnowledge);
-  }
 
   const systemInstruction = `You are the official AI Recruitment & Website Assistant for "Bucks & Bricks Co.", a premier global recruitment, executive search, HR consulting, and tech talent acquisition firm.
 Your ONLY responsibility is to assist website visitors by answering questions related strictly to Bucks & Bricks Co., our published job vacancies, recruitment services, leadership team, trusted industries, application workflow, and free AI Resume Checker tool based on the provided website knowledge base.
@@ -213,7 +206,7 @@ CRITICAL OPERATIONAL & SECURITY MANDATES:
     }
     return replyText;
   } catch (error) {
-    logger.warn(`Gemini API Chatbot request failed (${error.message}). Switching to intelligent fallback response.`);
-    return getFallbackChatResponse(userMessage, jobs, websiteKnowledge);
+    logger.error(`❌ [GEMINI ERROR] Chatbot request failed: ${error.message}`);
+    throw new Error(`Chatbot AI service failed to generate response: ${error.message}`);
   }
 };

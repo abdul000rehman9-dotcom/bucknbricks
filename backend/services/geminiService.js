@@ -6,9 +6,8 @@ let aiClient = null;
 const getGenAI = () => {
   if (!aiClient) {
     const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      logger.warn('GEMINI_API_KEY is missing. Gemini AI features will use baseline scoring mode.');
-      return null;
+    if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY' || apiKey.startsWith('YOUR_')) {
+      throw new Error('GEMINI_API_KEY environment variable is missing or invalid in .env.');
     }
     aiClient = new GoogleGenAI({ apiKey });
   }
@@ -20,9 +19,6 @@ const getGenAI = () => {
  */
 export const analyzeContentWithGemini = async (prompt, systemInstruction = '') => {
   const ai = getGenAI();
-  if (!ai) {
-    throw new Error('GEMINI_API_KEY environment variable is not configured in server environment.');
-  }
 
   const response = await ai.models.generateContent({
     model: 'gemini-3.6-flash',
@@ -46,14 +42,6 @@ export const analyzeContentWithGemini = async (prompt, systemInstruction = '') =
  */
 export const calculateAtsScore = async (resumeText, jobDescription = '') => {
   const ai = getGenAI();
-
-  // Baseline scoring fallback if GEMINI_API_KEY is missing
-  if (!ai) {
-    logger.warn('GEMINI_API_KEY missing - calculating baseline content-depth ATS score.');
-    const textLength = resumeText ? resumeText.length : 0;
-    const baseScore = Math.min(92, Math.max(68, Math.floor(textLength / 50) + 65));
-    return `${baseScore}%`;
-  }
 
   const systemInstruction = `You are a strict, objective, deterministic ATS (Applicant Tracking System) AI Scorer.
 Your task is to evaluate the provided resume text ${jobDescription ? 'against the job description requirements' : 'for professional ATS formatting, structure, completeness, and keyword density'} and calculate a consistent, repeatable score between 0 and 100.

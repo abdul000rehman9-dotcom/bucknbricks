@@ -3,8 +3,8 @@ import { JWT_CONFIG } from '../config/constants.js';
 
 const getJwtSecret = () => {
   const secret = process.env.JWT_SECRET;
-  if (!secret || secret === 'YOUR_JWT_SECRET') {
-    return JWT_CONFIG.DEFAULT_SECRET;
+  if (!secret || secret === 'YOUR_JWT_SECRET' || secret.startsWith('YOUR_')) {
+    throw new Error('JWT_SECRET environment variable is missing or invalid in .env.');
   }
   return secret;
 };

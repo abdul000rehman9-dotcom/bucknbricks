@@ -3,17 +3,23 @@ import { createApp } from './app.js';
 import { connectDB, disconnectDB } from './config/db.js';
 import { logger } from './utils/logger.js';
 
-// Validate environment variables and document status at startup
-validateEnvironment();
-
-const PORT = 3000;
-const HOST = '0.0.0.0';
-
-// Handle Uncaught Exceptions
+// Handle Uncaught Exceptions first so fatal startup errors exit cleanly
 process.on('uncaughtException', (err) => {
   logger.error(`UNCAUGHT EXCEPTION: ${err.name} - ${err.message}`);
   if (err.stack) logger.error(err.stack);
+  process.exit(1);
 });
+
+// Validate environment variables at startup (fails fast if missing or invalid)
+try {
+  validateEnvironment();
+} catch (err) {
+  logger.error(`❌ Fatal Configuration Error: ${err.message}`);
+  process.exit(1);
+}
+
+const PORT = process.env.PORT || 3000;
+const HOST = '0.0.0.0';
 
 async function startServer() {
   // Create Express App first so HTTP server starts immediately
@@ -32,7 +38,7 @@ async function startServer() {
     }
   });
 
-  // Connect to MongoDB Atlas non-blockingly
+  // Connect to MongoDB
   connectDB().catch((err) => {
     logger.warn(`Database connection notice: ${err.message}`);
   });

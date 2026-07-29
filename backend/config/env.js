@@ -5,37 +5,37 @@ import { logger } from '../utils/logger.js';
 dotenv.config();
 
 /**
- * Validate and document application environment startup variables.
- * Provides clean developer experience without crashing when running in demo/offline mode.
+ * Validate application environment startup variables.
+ * Fails fast with a clear error message if any required configuration is missing or invalid.
  */
 export const validateEnvironment = () => {
   const env = process.env.NODE_ENV || 'development';
   const port = process.env.PORT || 3000;
-  
-  const checks = [
+
+  const requiredVariables = [
     {
       key: 'MONGODB_URI',
       name: 'MongoDB Database Connection',
-      isSet: Boolean(process.env.MONGODB_URI && process.env.MONGODB_URI !== 'YOUR_MONGODB_URI' && (process.env.MONGODB_URI.startsWith('mongodb://') || process.env.MONGODB_URI.startsWith('mongodb+srv://'))),
-      fallback: 'Offline memory-based fallback database enabled (100% functional demo mode)'
-    },
-    {
-      key: 'GEMINI_API_KEY',
-      name: 'Google Gemini AI (ATS & Chatbot)',
-      isSet: Boolean(process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'YOUR_GEMINI_API_KEY'),
-      fallback: 'Intelligent rule-based ATS scoring & gatekeeper chatbot fallback enabled'
+      validator: (val) => Boolean(val && val !== 'YOUR_MONGODB_URI' && !val.startsWith('YOUR_') && (val.startsWith('mongodb://') || val.startsWith('mongodb+srv://'))),
+      expected: 'A valid MongoDB connection string starting with mongodb:// or mongodb+srv://'
     },
     {
       key: 'JWT_SECRET',
       name: 'JWT Authentication Secret',
-      isSet: Boolean(process.env.JWT_SECRET && process.env.JWT_SECRET !== 'YOUR_JWT_SECRET'),
-      fallback: 'Default secure development secret applied'
+      validator: (val) => Boolean(val && val !== 'YOUR_JWT_SECRET' && !val.startsWith('YOUR_')),
+      expected: 'A secure secret string for signing JWT tokens'
+    },
+    {
+      key: 'GEMINI_API_KEY',
+      name: 'Google Gemini API Key',
+      validator: (val) => Boolean(val && val !== 'YOUR_GEMINI_API_KEY' && !val.startsWith('YOUR_')),
+      expected: 'A valid Google AI Studio Gemini API key'
     },
     {
       key: 'RESEND_API_KEY',
-      name: 'Resend Email Service',
-      isSet: Boolean(process.env.RESEND_API_KEY && process.env.RESEND_API_KEY !== 'YOUR_RESEND_API_KEY'),
-      fallback: 'Simulated email delivery log mode enabled'
+      name: 'Resend Email Service API Key',
+      validator: (val) => Boolean(val && val !== 'YOUR_RESEND_API_KEY' && !val.startsWith('YOUR_')),
+      expected: 'A valid Resend API key'
     }
   ];
 
@@ -43,15 +43,28 @@ export const validateEnvironment = () => {
   logger.info(`🚀 Starting AI Recruitment Platform [Mode: ${env.toUpperCase()}]`);
   logger.info(`=============================================================`);
 
-  checks.forEach((check) => {
-    if (check.isSet) {
-      logger.info(`✅ [ENV] ${check.name} (${check.key}): Configured`);
-    } else if (env === 'production') {
-      logger.warn(`⚠️  [ENV WARNING] Production Mode: ${check.name} (${check.key}) is NOT set! Fallback active -> ${check.fallback}`);
+  const missingOrInvalid = [];
+
+  requiredVariables.forEach((reqVar) => {
+    const val = process.env[reqVar.key];
+    if (!reqVar.validator(val)) {
+      missingOrInvalid.push(reqVar);
+      logger.error(`❌ [ENV ERROR] ${reqVar.name} (${reqVar.key}) is missing or invalid.`);
+      logger.error(`   Expected: ${reqVar.expected}`);
     } else {
-      logger.info(`ℹ️  [ENV INFO] Development Mode: ${check.name} (${check.key}) not set. Using local fallback -> ${check.fallback}`);
+      logger.info(`✅ [ENV] ${reqVar.name} (${reqVar.key}): Configured`);
     }
   });
+
+  if (missingOrInvalid.length > 0) {
+    const missingKeys = missingOrInvalid.map((v) => v.key).join(', ');
+    const errorMsg = `Startup Error: Missing or invalid required environment variables: ${missingKeys}. Please check your .env file.`;
+    logger.error(`=============================================================`);
+    logger.error(`❌ FATAL CONFIGURATION ERROR`);
+    logger.error(errorMsg);
+    logger.error(`=============================================================`);
+    throw new Error(errorMsg);
+  }
 
   logger.info(`-------------------------------------------------------------`);
   return { env, port };

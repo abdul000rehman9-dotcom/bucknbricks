@@ -37,5 +37,4 @@ export const ADMIN_ROLES = {
 
 export const JWT_CONFIG = {
   EXPIRES_IN: process.env.JWT_EXPIRES_IN || '7d',
-  DEFAULT_SECRET: 'ai_recruitment_jwt_secret_key_2026_super_secure',
 };

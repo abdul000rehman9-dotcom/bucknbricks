@@ -8,13 +8,9 @@ export const connectDB = async () => {
   try {
     let mongoURI = process.env.MONGODB_URI;
 
-    if (!mongoURI || mongoURI === 'YOUR_MONGODB_URI' || (!mongoURI.startsWith('mongodb://') && !mongoURI.startsWith('mongodb+srv://'))) {
-      const msg = 'MONGODB_URI is not defined or is set to placeholder. Running in offline database fallback mode.';
-      if (process.env.NODE_ENV === 'production') {
-        logger.warn(`⚠️  [DATABASE WARNING] Production Mode: ${msg} Please configure MONGODB_URI for production persistence.`);
-      } else {
-        logger.info(`ℹ️  [DATABASE INFO] Development Mode: ${msg}`);
-      }
+    if (!mongoURI || mongoURI === 'YOUR_MONGODB_URI' || mongoURI.startsWith('YOUR_') || (!mongoURI.startsWith('mongodb://') && !mongoURI.startsWith('mongodb+srv://'))) {
+      const msg = 'MONGODB_URI environment variable is missing or placeholder. Running without direct MongoDB connection.';
+      logger.warn(`⚠️ [DATABASE NOTICE] ${msg}`);
       mongoose.set('bufferCommands', false);
       return false;
     }
@@ -25,7 +21,9 @@ export const connectDB = async () => {
     const options = {
       autoIndex: true,
       serverSelectionTimeoutMS: 5000,
-      socketTimeoutMS: 45000,
+      socketTimeoutMS: 30000,
+      dbName: 'ai_recruitment',
+      authSource: 'admin',
     };
 
     const conn = await mongoose.connect(mongoURI, options);
@@ -38,7 +36,7 @@ export const connectDB = async () => {
     });
 
     mongoose.connection.on('disconnected', () => {
-      logger.warn('MongoDB disconnected. Attempting to reconnect...');
+      logger.warn('MongoDB disconnected.');
     });
 
     mongoose.connection.on('reconnected', () => {
@@ -47,13 +45,7 @@ export const connectDB = async () => {
 
     return true;
   } catch (error) {
-    const msg = `MongoDB Atlas connection failed: ${error.message}. Running in offline database fallback mode.`;
-    if (process.env.NODE_ENV === 'production') {
-      logger.warn(`⚠️  [DATABASE WARNING] Production Mode: ${msg}`);
-    } else {
-      logger.info(`ℹ️  [DATABASE INFO] Development Mode: ${msg}`);
-    }
-    // Non-blocking for development setup - disable buffering to prevent 10s query hangs
+    logger.warn(`⚠️ [DATABASE NOTICE] MongoDB connection notice: ${error.message}. Running in offline fallback mode.`);
     mongoose.set('bufferCommands', false);
     return false;
   }

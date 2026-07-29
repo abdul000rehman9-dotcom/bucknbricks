@@ -1,8 +1,0 @@
-{
-  "name": "Bucks n Bricks",
-  "description": "Next-Gen HR & Talent Solutions",
-  "requestFramePermissions": [],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
-}
