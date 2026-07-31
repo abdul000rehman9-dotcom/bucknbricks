@@ -5,8 +5,9 @@ import { AnimatedHeading, AnimatedParagraph, StaggerContainer, StaggerItem } fro
 import { Team } from './Team';
 import { JourneyTimeline } from './JourneyTimeline';
 import { Contact } from './Contact';
-const officeCollaboration = '/assets/office_collaboration_group.jpeg';
-const digitalWorkplace = '/assets/recruitment_digital_workplace.jpeg';
+const officeCollaboration = '/assets(2)/about_office_collaboration.jpg';
+const heroBannerImg = '/assets(2)/about_hero_banner.jpg';
+const digitalWorkplace = '/assets(2)/about_digital_workplace.jpg';
 
 export function AboutPage() {
   useEffect(() => {
@@ -52,13 +53,12 @@ export function AboutPage() {
             />
             {/* Image with subtle zoom-out scale */}
             <motion.img
-              initial={{ scale: 1.15 }}
+              initial={{ scale: 1 }}
               animate={{ scale: 1 }}
               transition={{ duration: 1.6, ease: 'easeOut', delay: 0.1 }}
-              src={digitalWorkplace}
+              src={heroBannerImg}
               alt="Building Teams. Creating Futures."
               className="w-full h-full object-cover"
-              
             />
           </div>
         </div>
@@ -83,13 +83,12 @@ export function AboutPage() {
                 whileInView={{ opacity: 1, scale: 1, x: 0 }}
                 viewport={{ once: false, margin: '-10% 0px' }}
                 transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-3xl aspect-[4/3] w-full overflow-hidden shadow-xl border border-slate-200/50 bg-slate-50 relative"
+                className="rounded-3xl aspect-[4/3] w-full overflow-hidden shadow-xl border border-slate-200/50 bg-[#0b132a] relative flex items-center justify-center"
               >
                 <img
                   src={officeCollaboration}
                   alt="Professional Specialist Working"
                   className="w-full h-full object-cover"
-                  
                 />
               </motion.div>
             </div>
@@ -164,7 +163,7 @@ export function AboutPage() {
               <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-sm text-white mb-8 group-hover:scale-110 transition-transform duration-300">
                 01
               </div>
-              <h3 className="font-bold font-display text-xl mb-4 text-white">
+              <h3 className="font-bold font-display text-xl mb-4" style={{ color: '#89C7F5' }}>
                 Our Mission
               </h3>
               <p className="text-slate-300 font-sans text-xs sm:text-sm leading-relaxed">
@@ -179,13 +178,12 @@ export function AboutPage() {
               viewport={{ once: false }}
               transition={{ duration: 0.6, delay: 0.2 }}
               whileHover={{ y: -5 }}
-              className="rounded-3xl overflow-hidden shadow-lg border border-slate-200/50 aspect-[4/3] md:aspect-auto md:h-full relative bg-slate-50 group transition-all duration-300 hover:shadow-2xl"
+              className="rounded-3xl overflow-hidden shadow-lg border border-slate-200/50 aspect-[4/3] md:aspect-auto md:h-full relative bg-[#0b132a] group transition-all duration-300 hover:shadow-2xl flex items-center justify-center"
             >
               <img
                 src={digitalWorkplace}
                 alt="Keyboard Typing Hands"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                
               />
             </motion.div>
 
@@ -202,7 +200,7 @@ export function AboutPage() {
               <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-sm text-white mb-8 group-hover:scale-110 transition-transform duration-300">
                 02
               </div>
-              <h3 className="font-bold font-display text-xl mb-4 text-white">
+              <h3 className="font-bold font-display text-xl mb-4" style={{ color: '#89C7F5' }}>
                 Our Vision
               </h3>
               <p className="text-slate-300 font-sans text-xs sm:text-sm leading-relaxed">

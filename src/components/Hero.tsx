@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { AnimatedHeading, AnimatedParagraph, AnimatedButton } from './animations';
-const hrTalentRecruitment = '/assets/hr_talent_recruitment.jpeg';
+const hrTalentRecruitment = '/assets(2)/hero_talent_recruitment.jpg';
 
 interface CircularProgressBadgeProps {
   isLoaded: boolean;
@@ -218,12 +218,12 @@ export function Hero() {
               animate={{ opacity: 1, scale: 1 }}
               style={{ willChange: 'transform, opacity' }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="w-full h-full rounded-3xl overflow-hidden shadow-2xl bg-slate-100 relative z-10"
+              className="w-full h-full rounded-3xl overflow-hidden shadow-2xl bg-[#041d24] relative z-10 flex items-center justify-center"
             >
               <img
                 src={hrTalentRecruitment}
                 alt="Professional HR Specialist"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
                 onLoad={() => setIsHeroLoaded(true)}
               />
             </motion.div>

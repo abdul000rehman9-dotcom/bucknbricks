@@ -4,9 +4,9 @@ import { Calendar, ArrowUpRight } from 'lucide-react';
 import { AnimatedHeading, AnimatedParagraph } from './animations';
 import { BlogPost } from '../types';
 
-const hrRecruitmentProcess = '/assets/hr_recruitment_process.jpeg';
-const recruitmentDigitalWorkplace = '/assets/recruitment_digital_workplace.jpeg';
-const hrRecruitmentServices = '/assets/hr_recruitment_services.jpeg';
+const blogImg1 = '/assets(2)/blog_job_search_tips.jpg';
+const blogImg2 = '/assets(2)/blog_competition_jobs.jpg';
+const blogImg3 = '/assets(2)/blog_foreign_workers.jpg';
 
 const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
 
@@ -95,7 +95,7 @@ const BlogCardInner: React.FC<{ post: BlogPost; index: number }> = ({ post, inde
       className="group bg-white rounded-3xl overflow-hidden border border-slate-100/90 transition-all duration-300 flex flex-col justify-between text-left cursor-pointer [will-change:transform,opacity]"
     >
       {/* Dynamic Image Container */}
-      <div className="relative aspect-[1.5] w-full overflow-hidden bg-slate-100 shrink-0">
+      <div className="relative aspect-[1.5] w-full overflow-hidden bg-[#0b132a] shrink-0 flex items-center justify-center">
         <motion.img
           src={post.image}
           alt={post.title}
@@ -105,7 +105,6 @@ const BlogCardInner: React.FC<{ post: BlogPost; index: number }> = ({ post, inde
             scale: smoothScale,
           }}
           className="w-full h-full object-cover origin-center"
-          
         />
         <span className="absolute top-4 left-4 z-10 text-[10px] font-extrabold uppercase tracking-widest text-slate-800 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded">
           {post.category}
@@ -139,21 +138,21 @@ export function BlogCards() {
       category: 'Automation',
       date: '07 Nov 2025',
       title: 'Payroll HR With Automated Workforce Management',
-      image: hrRecruitmentProcess,
+      image: blogImg1,
     },
     {
       id: '2',
       category: 'Efficiency',
       date: '07 Nov 2025',
       title: 'Improve Employee Efficiency Using HRM Solutions',
-      image: recruitmentDigitalWorkplace,
+      image: blogImg2,
     },
     {
       id: '3',
       category: 'Payroll',
       date: '07 Nov 2025',
       title: 'Boost Productivity With Efficient Time HR Systems',
-      image: hrRecruitmentServices,
+      image: blogImg3,
     },
   ];
 

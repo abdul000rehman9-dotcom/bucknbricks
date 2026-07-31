@@ -6,8 +6,8 @@ import { Contact } from './Contact';
 import { JourneyTimeline } from './JourneyTimeline';
 import { AnimatedHeading, AnimatedParagraph, AnimatedButton } from './animations';
 
-const professionalHandshake = '/assets/professional_handshake_greeting.jpeg';
-const digitalWorkplace = '/assets/recruitment_digital_workplace.jpeg';
+const professionalHandshake = '/assets(2)/ceo_professional_handshake.jpg';
+const digitalWorkplace = '/assets(2)/ceo_digital_workplace.jpg';
 
 // Smooth spring animation config for luxury feel
 const springConfig = { damping: 30, stiffness: 120, mass: 0.8 };
@@ -198,13 +198,13 @@ export function CEOPage() {
                   rotateY: smoothRotateY,
                   transformStyle: 'preserve-3d',
                 }}
-                className="relative aspect-square w-full rounded-[32px] overflow-hidden shadow-2xl bg-slate-100 group cursor-grab active:cursor-grabbing border border-slate-200/40"
+                className="relative aspect-square w-full rounded-[32px] overflow-hidden shadow-2xl bg-[#0b132a] group cursor-grab active:cursor-grabbing border border-slate-200/40 flex items-center justify-center"
               >
-                {/* Clean, high-contrast, black and white styled founder image */}
+                {/* Clean, high-contrast styled image */}
                 <img
                   src={professionalHandshake}
                   alt="Arbab Wasi"
-                  className="w-full h-full object-cover grayscale contrast-[1.12] transition-transform duration-500"
+                  className="w-full h-full object-cover contrast-[1.05] transition-transform duration-500"
                 />
                 
                 {/* Corner light reflection mask for extra luxury finish */}
@@ -337,7 +337,7 @@ export function CEOPage() {
               <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-sm text-white mb-8 group-hover:scale-110 transition-transform duration-300">
                 01
               </div>
-              <h3 className="font-bold font-display text-xl mb-4 text-white">
+              <h3 className="font-bold font-display text-xl mb-4" style={{ color: '#89C7F5' }}>
                 Our Mission
               </h3>
               <p className="text-slate-300 font-sans text-xs sm:text-sm leading-relaxed">
@@ -352,7 +352,7 @@ export function CEOPage() {
               viewport={{ once: false }}
               transition={{ duration: 0.6, delay: 0.2 }}
               whileHover={{ y: -5 }}
-              className="rounded-3xl overflow-hidden shadow-lg border border-slate-200/50 aspect-[4/3] md:aspect-auto md:h-full relative bg-slate-50 group transition-all duration-300 hover:shadow-2xl"
+              className="rounded-3xl overflow-hidden shadow-lg border border-slate-200/50 aspect-[4/3] md:aspect-auto md:h-full relative bg-[#0b132a] group transition-all duration-300 hover:shadow-2xl flex items-center justify-center"
             >
               <img
                 src={digitalWorkplace}
@@ -373,7 +373,7 @@ export function CEOPage() {
               <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center font-bold text-sm text-white mb-8 group-hover:scale-110 transition-transform duration-300">
                 02
               </div>
-              <h3 className="font-bold font-display text-xl mb-4 text-white">
+              <h3 className="font-bold font-display text-xl mb-4" style={{ color: '#89C7F5' }}>
                 Our Vision
               </h3>
               <p className="text-slate-300 font-sans text-xs sm:text-sm leading-relaxed">

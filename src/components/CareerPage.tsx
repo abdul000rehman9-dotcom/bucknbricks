@@ -4,8 +4,8 @@ import { StaggerContainer, StaggerItem } from './animations';
 import { Vacancies } from './Vacancies';
 import { Contact } from './Contact';
 
-const recruitmentSolutionImg = '/assets/recruitment_process_screening.jpeg';
-const specialistImg = '/assets/hiring_process_handshake.jpeg';
+const recruitmentSolutionImg = '/assets(2)/career_recruitment_solution.jpg';
+const specialistImg = '/assets(2)/career_specialist.jpg';
 
 export function CareerPage() {
   useEffect(() => {
@@ -68,7 +68,7 @@ export function CareerPage() {
                 }
               }
             }}
-            className="relative w-full max-w-5xl aspect-[16/9] md:aspect-[21/9] mx-auto rounded-3xl overflow-hidden shadow-2xl bg-slate-100 mb-16"
+            className="relative w-full max-w-5xl aspect-[16/9] md:aspect-[21/9] mx-auto rounded-3xl overflow-hidden shadow-2xl bg-[#0b132a] mb-16 flex items-center justify-center"
           >
             <img
               src={recruitmentSolutionImg}
@@ -109,7 +109,7 @@ export function CareerPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: false, margin: '-10% 0px' }}
                 transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-3xl aspect-[4/3] w-full overflow-hidden shadow-xl border border-slate-200/50 bg-slate-50 relative"
+                className="rounded-3xl aspect-[4/3] w-full overflow-hidden shadow-xl border border-slate-200/50 bg-[#0b132a] relative flex items-center justify-center"
               >
                 <img
                   src={specialistImg}

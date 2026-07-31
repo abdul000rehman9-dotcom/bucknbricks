@@ -7,10 +7,13 @@ import { Contact } from './Contact';
 import { AnimatedHeading, AnimatedParagraph } from './animations';
 import { BlogPost } from '../types';
 
-const hrRecruitmentProcess = '/assets/hr_recruitment_process.jpeg';
-const recruitmentDigitalWorkplace = '/assets/recruitment_digital_workplace.jpeg';
-const hrRecruitmentServices = '/assets/hr_recruitment_services.jpeg';
-const jobApplicationReview = '/assets/job_application_review.jpeg';
+const blogImg1 = '/assets(2)/blog_job_search_tips.jpg';
+const blogImg2 = '/assets(2)/blog_competition_jobs.jpg';
+const blogImg3 = '/assets(2)/blog_foreign_workers.jpg';
+const blogImg4 = '/assets(2)/blog_digital_agency.jpg';
+const blogImg5 = '/assets(2)/blog_data_protection.jpg';
+const blogImg6 = '/assets(2)/blog_workplace.jpg';
+const featuredBlogImg = '/assets(2)/blog_featured_recruitment.jpg';
 
 const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
 
@@ -112,7 +115,6 @@ const BlogCard: React.FC<{ post: BlogPost; index: number }> = ({ post, index }) 
             scale: smoothScale,
           }}
           className="w-full h-full object-cover origin-center"
-          
         />
         <span className="absolute top-4 left-4 z-20 text-[10px] font-extrabold uppercase tracking-widest text-slate-800 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-sm">
           {post.category}
@@ -165,42 +167,42 @@ export function BlogPage() {
       category: 'Automation',
       date: '07 Nov 2025',
       title: 'Payroll HR With Automated Workforce Management',
-      image: hrRecruitmentProcess,
+      image: blogImg1,
     },
     {
       id: '2',
       category: 'Efficiency',
       date: '07 Nov 2025',
       title: 'Improve Employee Efficiency Using HRM Solutions',
-      image: recruitmentDigitalWorkplace,
+      image: blogImg2,
     },
     {
       id: '3',
       category: 'Payroll',
       date: '07 Nov 2025',
       title: 'Boost Productivity With Efficient Time HR Systems',
-      image: hrRecruitmentServices,
+      image: blogImg3,
     },
     {
       id: '4',
       category: 'Automation',
       date: '07 Nov 2025',
       title: 'Payroll HR With Automated Workforce Management',
-      image: hrRecruitmentProcess,
+      image: blogImg4,
     },
     {
       id: '5',
       category: 'Efficiency',
       date: '07 Nov 2025',
       title: 'Improve Employee Efficiency Using HRM Solutions',
-      image: recruitmentDigitalWorkplace,
+      image: blogImg5,
     },
     {
       id: '6',
       category: 'Payroll',
       date: '07 Nov 2025',
       title: 'Boost Productivity With Efficient Time HR Systems',
-      image: hrRecruitmentServices,
+      image: blogImg6,
     },
   ];
 
@@ -228,12 +230,11 @@ export function BlogPage() {
             className="max-w-5xl mx-auto bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-xl shadow-slate-950/5 grid grid-cols-1 md:grid-cols-12 gap-0 group cursor-pointer"
           >
             {/* Featured Image */}
-            <div className="md:col-span-6 relative aspect-[16/10] md:aspect-auto overflow-hidden bg-slate-50 min-h-[250px] md:min-h-[380px]">
+            <div className="md:col-span-6 relative aspect-[16/10] md:aspect-auto overflow-hidden bg-[#0b132a] min-h-[250px] md:min-h-[380px] flex items-center justify-center">
               <motion.img
-                src={jobApplicationReview}
+                src={featuredBlogImg}
                 alt="HRM Improves Workflow and Compliance Standards"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                
               />
               <div className="absolute inset-0 bg-blue-950/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>

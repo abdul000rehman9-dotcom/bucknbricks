@@ -228,7 +228,7 @@ export function JourneyTimeline() {
                   }`}
                 >
                   <span className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded-full transition-colors duration-300 ${
-                    activeMilestone === '1' ? 'bg-[#0b1c24]' : 'bg-slate-300'
+                    activeMilestone === '1' ? 'bg-[#89c7f5]' : 'bg-[#89c7f5]/40'
                   }`} />
                 </motion.button>
 
@@ -320,7 +320,7 @@ export function JourneyTimeline() {
                   }`}
                 >
                   <span className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded-full transition-colors duration-300 ${
-                    activeMilestone === '2' ? 'bg-[#0b1c24]' : 'bg-slate-300'
+                    activeMilestone === '2' ? 'bg-[#89c7f5]' : 'bg-[#89c7f5]/40'
                   }`} />
                 </motion.button>
 
@@ -412,7 +412,7 @@ export function JourneyTimeline() {
                   }`}
                 >
                   <span className={`w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 rounded-full transition-colors duration-300 ${
-                    activeMilestone === '3' ? 'bg-[#0b1c24]' : 'bg-slate-300'
+                    activeMilestone === '3' ? 'bg-[#89c7f5]' : 'bg-[#89c7f5]/40'
                   }`} />
                 </motion.button>
 

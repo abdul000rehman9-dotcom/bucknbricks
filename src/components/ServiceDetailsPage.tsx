@@ -5,11 +5,17 @@ import { AnimatedHeading, StaggerContainer, StaggerItem } from './animations';
 import { Vacancies } from './Vacancies';
 import { Contact } from './Contact';
 
-const executiveSearchImg = '/assets/job_interview_meeting.jpeg';
-const recruitmentSolutionImg = '/assets/recruitment_process_screening.jpeg';
-const hrConsultingImg = '/assets/hr_candidate_evaluation.jpeg';
-const learningDevelopmentImg = '/assets/hr_digital_networking_solution.jpeg';
-const specialistImg = '/assets/hiring_process_handshake.jpeg';
+const executiveSearchHeroImg = '/assets(2)/executive_search_hero.jpg';
+const executiveSearchDetailImg = '/assets(2)/executive_search_detail.jpg';
+
+const recruitmentSolutionHeroImg = '/assets(2)/recruitment_solution_hero.jpg';
+const recruitmentSolutionDetailImg = '/assets(2)/recruitment_solution_detail.jpg';
+
+const hrConsultingHeroImg = '/assets(2)/hr_consulting_hero.jpg';
+const hrConsultingDetailImg = '/assets(2)/hr_consulting_detail.jpg';
+
+const learningDevelopmentHeroImg = '/assets(2)/learning_development_hero.jpg';
+const learningDevelopmentDetailImg = '/assets(2)/learning_development_detail.jpg';
 
 interface ServiceDetailsPageProps {
   serviceType: 'executive-search' | 'recruitment-solution' | 'hr-consulting' | 'learning-development';
@@ -32,30 +38,60 @@ export function ServiceDetailsPage({ serviceType }: ServiceDetailsPageProps) {
     return () => clearTimeout(timer);
   }, [serviceType]);
 
-  // Determine dynamic heading and image based on serviceType
+  // Determine dynamic heading, images, and content based on serviceType
   let title = '';
   let heroImg = '';
+  let detailImg = '';
+  let caseStudyTitle = '';
+  let challengeText = '';
+  let solutionText = '';
+  let resultText = '';
 
   switch (serviceType) {
     case 'executive-search':
       title = 'Executive Search';
-      heroImg = executiveSearchImg;
+      heroImg = executiveSearchHeroImg;
+      detailImg = executiveSearchDetailImg;
+      caseStudyTitle = 'Executive Search Case Study';
+      challengeText = 'A leading FMCG company required an experienced senior manager within a short timeframe.';
+      solutionText = 'Targeted executive search and industry-specific talent mapping.';
+      resultText = 'Position successfully filled with a highly qualified candidate within the agreed timeline.';
       break;
     case 'recruitment-solution':
       title = 'Recruitment Solutions';
-      heroImg = recruitmentSolutionImg;
+      heroImg = recruitmentSolutionHeroImg;
+      detailImg = recruitmentSolutionDetailImg;
+      caseStudyTitle = 'Recruitment Solutions Case Study';
+      challengeText = 'A rapidly growing organization needed to scale specialized teams across multiple departments.';
+      solutionText = 'End-to-end candidate sourcing, screening, and streamlined placement workflow.';
+      resultText = 'Multiple strategic roles filled efficiently with top-tier professional retention.';
       break;
     case 'hr-consulting':
       title = 'HR Consulting';
-      heroImg = hrConsultingImg;
+      heroImg = hrConsultingHeroImg;
+      detailImg = hrConsultingDetailImg;
+      caseStudyTitle = 'HR Consulting Case Study';
+      challengeText = 'An expanding firm required policy alignment and workforce structure optimization.';
+      solutionText = 'Comprehensive HR audit, organizational redesign, and strategic policy framework.';
+      resultText = 'Significantly improved operational efficiency and organizational clarity.';
       break;
     case 'learning-development':
       title = 'Learning & Development';
-      heroImg = learningDevelopmentImg;
+      heroImg = learningDevelopmentHeroImg;
+      detailImg = learningDevelopmentDetailImg;
+      caseStudyTitle = 'Learning & Development Case Study';
+      challengeText = 'A company sought to upskill team capabilities for digital transformation readiness.';
+      solutionText = 'Customized leadership training modules and continuous talent development programs.';
+      resultText = 'Achieved high engagement and measurable team performance enhancement.';
       break;
     default:
       title = 'Our Services';
-      heroImg = recruitmentSolutionImg;
+      heroImg = recruitmentSolutionHeroImg;
+      detailImg = recruitmentSolutionDetailImg;
+      caseStudyTitle = 'Case Study';
+      challengeText = 'Solving workforce challenges with targeted leadership.';
+      solutionText = 'Delivering tailored recruitment and HR strategies.';
+      resultText = 'Ensuring long-term success and organizational growth.';
   }
 
   return (
@@ -79,15 +115,14 @@ export function ServiceDetailsPage({ serviceType }: ServiceDetailsPageProps) {
               style={{ originX: 1 }}
               className="absolute inset-0 bg-[#0b132a] z-10"
             />
-            <motion.img
-              initial={{ scale: 1.15 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 1.6, ease: 'easeOut', delay: 0.1 }}
-              src={heroImg}
-              alt={title}
-              className="w-full h-full object-cover"
-              
-            />
+              <motion.img
+                initial={{ scale: 1 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 1.6, ease: 'easeOut', delay: 0.1 }}
+                src={heroImg}
+                alt={title}
+                className="w-full h-full object-cover"
+              />
           </div>
         </div>
       </section>
@@ -97,7 +132,7 @@ export function ServiceDetailsPage({ serviceType }: ServiceDetailsPageProps) {
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16 text-center">
             <AnimatedHeading
-              text="Executive Search"
+              text={caseStudyTitle}
               className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-[#011c30] tracking-tight text-center"
             />
           </div>
@@ -109,13 +144,12 @@ export function ServiceDetailsPage({ serviceType }: ServiceDetailsPageProps) {
                 whileInView={{ opacity: 1, scale: 1, x: 0 }}
                 viewport={{ once: false, margin: '-10% 0px' }}
                 transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-3xl aspect-[4/3] w-full overflow-hidden shadow-xl border border-slate-200/50 bg-slate-50 relative"
+                className="rounded-3xl aspect-[4/3] w-full overflow-hidden shadow-xl border border-slate-200/50 bg-[#0b132a] relative flex items-center justify-center"
               >
                 <img
-                  src={specialistImg}
-                  alt="Professional Specialist Working"
+                  src={detailImg}
+                  alt={title}
                   className="w-full h-full object-cover"
-                  
                 />
               </motion.div>
             </div>
@@ -126,7 +160,7 @@ export function ServiceDetailsPage({ serviceType }: ServiceDetailsPageProps) {
                   <div className="border-b border-slate-100 pb-6">
                     <h3 className="text-[#011c30] font-bold font-display text-xl mb-2">Challenge</h3>
                     <p className="text-slate-600 font-sans text-xs sm:text-sm sm:leading-relaxed">
-                      A leading FMCG company required an experienced senior manager within a short timeframe.
+                      {challengeText}
                     </p>
                   </div>
                 </StaggerItem>
@@ -135,7 +169,7 @@ export function ServiceDetailsPage({ serviceType }: ServiceDetailsPageProps) {
                   <div className="border-b border-slate-100 pb-6">
                     <h3 className="text-[#011c30] font-bold font-display text-xl mb-2">Our Solution</h3>
                     <p className="text-slate-600 font-sans text-xs sm:text-sm sm:leading-relaxed">
-                      Targeted executive search and industry-specific talent mapping
+                      {solutionText}
                     </p>
                   </div>
                 </StaggerItem>
@@ -144,7 +178,7 @@ export function ServiceDetailsPage({ serviceType }: ServiceDetailsPageProps) {
                   <div className="pb-2">
                     <h3 className="text-[#011c30] font-bold font-display text-xl mb-2">Result</h3>
                     <p className="text-slate-600 font-sans text-xs sm:text-sm sm:leading-relaxed">
-                   Position successfully filled with a highly qualified candidate within the agreed timeline.
+                      {resultText}
                     </p>
                   </div>
                 </StaggerItem>

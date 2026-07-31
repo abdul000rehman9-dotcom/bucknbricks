@@ -10,10 +10,10 @@ import {
 } from "./animations";
 import { TeamMember } from "../types";
 
-const professionalHandshake = '/assets/professional_handshake_greeting.jpeg';
-const candidateSourcing = '/assets/candidate_recruitment_sourcing.jpeg';
-const digitalWorkplace = '/assets/recruitment_digital_workplace.jpeg';
-const recruitmentScreening = '/assets/recruitment_process_screening.jpeg';
+const team1 = '/assets(2)/team-1.jpg';
+const team2 = '/assets(2)/team-2.jpg';
+const team3 = '/assets(2)/team-3.jpg';
+const team4 = '/assets(2)/team-4.jpg';
 
 export function Team() {
   const [activeId, setActiveId] = useState<string>("1");
@@ -23,28 +23,28 @@ export function Team() {
       id: "1",
       name: "Mr. Mark",
       role: "Talent Acquisition Director",
-      image: professionalHandshake,
+      image: team1,
       bgColor: "bg-gradient-to-b from-sky-400/90 to-sky-600/95",
     },
     {
       id: "2",
       name: "Nadia Lestary",
       role: "Senior Recruiting Partner",
-      image: candidateSourcing,
+      image: team2,
       bgColor: "bg-gradient-to-b from-rose-400/90 to-rose-600/95",
     },
     {
       id: "3",
       name: "Evan Caster Lee",
       role: "HR Tech Systems Specialist",
-      image: digitalWorkplace,
+      image: team3,
       bgColor: "bg-gradient-to-b from-teal-400/90 to-teal-600/95",
     },
     {
       id: "4",
       name: "Stefy Catlyna",
       role: "Operations & Payroll Lead",
-      image: recruitmentScreening,
+      image: team4,
       bgColor: "bg-gradient-to-b from-purple-400/90 to-purple-600/95",
     },
   ];
@@ -128,11 +128,12 @@ export function Team() {
                   <div className="flex flex-col items-start gap-1 pb-2">
                     <motion.h4
                       layout="position"
-                      className={`text-white font-bold font-display tracking-tight leading-tight ${
+                      className={`font-bold font-display tracking-tight leading-tight ${
                         isActive
                           ? "text-2xl sm:text-3xl md:text-4xl"
                           : "text-sm md:text-base"
                       }`}
+                      style={{ color: '#89C7F5' }}
                     >
                       {member.name}
                     </motion.h4>

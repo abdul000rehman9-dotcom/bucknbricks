@@ -6,8 +6,9 @@ import { ChevronUp, ChevronDown, Quote, Sparkles } from 'lucide-react';
 import { AnimatedHeading, AnimatedParagraph, AnimatedButton } from './animations';
 import { Testimonial } from '../types';
 
-const professionalHandshake = '/assets/professional_handshake_greeting.jpeg';
-const candidateSourcing = '/assets/candidate_recruitment_sourcing.jpeg';
+const client1 = '/assets(2)/client_1.jpg';
+const client2 = '/assets(2)/client2.jpg';
+const client3 = '/assets(2)/client3.jpg';
 
 export function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -20,14 +21,21 @@ export function Testimonials() {
       quote: '"HRFlow has made managing payroll and onboarding incredibly efficient for our team. The seamless integration and automation have saved us time and reduced errors. We can now focus more on strategic tasks."',
       author: 'John Davis',
       role: 'HR Manager',
-      avatar: professionalHandshake,
+      avatar: client1,
     },
     {
       id: '2',
       quote: '"Using HRFlow has transformed how we handle employee performance and compliance. The platform is user-friendly, saving us hours every week. We\'ve seen a noticeable improvement in team productivity."',
       author: 'Sarah Lee',
       role: 'Operations Director',
-      avatar: candidateSourcing,
+      avatar: client2,
+    },
+    {
+      id: '3',
+      quote: '"The talent recruitment solutions provided by the team exceeded our expectations. We secured executive roles in record time with top-tier candidates."',
+      author: 'Michael Vance',
+      role: 'Chief Executive Officer',
+      avatar: client3,
     },
   ];
 
@@ -151,7 +159,7 @@ export function Testimonials() {
                         {testimonials[activeIndex].role}
                       </p>
                     </div>
-                    <Quote size={24} className="text-slate-200 shrink-0 fill-current" />
+                    <Quote size={24} className="text-[#89c7f5] shrink-0 fill-current" />
                   </div>
                   
                   <p className="text-slate-600 font-sans text-xs sm:text-sm leading-relaxed italic pr-4">

@@ -131,12 +131,12 @@ export function Vacancies({
                 onClick={() => handleCardClick(job._id || job.id)}
                 className="bg-white rounded-2xl p-7 border border-slate-200/80 flex flex-col justify-between text-left relative overflow-hidden group cursor-pointer [will-change:transform,opacity] transition-colors duration-200"
               >
-                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#052842] transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
+                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#89c7f5] transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
 
                 <div>
                   <div className="flex justify-between items-start mb-4 gap-4">
                     <div className="flex items-center gap-3">
-                      <div className="p-2.5 bg-blue-50/80 text-[#052842] rounded-xl group-hover:bg-[#052842] group-hover:text-white transition-colors duration-300">
+                      <div className="p-2.5 bg-[#89c7f5]/15 text-[#89c7f5] rounded-xl group-hover:bg-[#89c7f5] group-hover:text-white transition-colors duration-300">
                         <Briefcase size={18} />
                       </div>
                       <div>
@@ -148,8 +148,8 @@ export function Vacancies({
                         )}
                       </div>
                     </div>
-                    <span className="flex items-center gap-1 text-xs font-semibold text-slate-500 bg-slate-50 px-3 py-1 rounded-full border border-slate-100 shrink-0">
-                      <MapPin size={12} className="text-[#052842]" />
+                    <span className="flex items-center gap-1 text-xs font-semibold text-[#89c7f5] bg-slate-50 px-3 py-1 rounded-full border border-slate-100 shrink-0">
+                      <MapPin size={12} className="text-[#89c7f5]" />
                       {job.city}
                     </span>
                   </div>
@@ -159,8 +159,8 @@ export function Vacancies({
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-slate-100 text-xs font-bold text-[#052842] group-hover:translate-x-1 transition-transform duration-200">
-                  <span>View Details & Apply</span>
+                <div className="flex items-center justify-between pt-4 border-t border-slate-100 text-xs font-bold text-[#89c7f5] group-hover:translate-x-1 transition-transform duration-200">
+                  <span className="text-[#89c7f5]">View Details & Apply</span>
                   <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-200" />
                 </div>
               </motion.div>

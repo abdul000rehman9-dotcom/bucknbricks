@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { Check, Sparkles } from 'lucide-react';
 import { AnimatedHeading, AnimatedParagraph, ImageReveal, StaggerContainer, StaggerItem } from './animations';
-const partnershipHandshake = '/assets/business_partnership_handshake.jpeg';
+const partnershipHandshake = '/assets(2)/why_choose_us_handshake.jpg';
 
 export function WhyChooseUs() {
   const pillars = [
@@ -41,13 +41,12 @@ export function WhyChooseUs() {
             viewport={{ once: false, margin: '-50px' }}
             style={{ willChange: 'transform, opacity' }}
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-3xl aspect-[4/3] w-full overflow-hidden shadow-xl border border-slate-200/50 relative bg-slate-100 flex items-center justify-center select-none"
+            className="rounded-3xl aspect-[4/3] w-full overflow-hidden shadow-xl border border-slate-200/50 relative bg-[#0b132a] flex items-center justify-center select-none"
           >
             <img
               src={partnershipHandshake}
               alt="Why Choose Bucks & Bricks"
               className="w-full h-full object-cover"
-              
             />
           </motion.div>
         </div>

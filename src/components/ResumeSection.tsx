@@ -5,10 +5,9 @@ import { Check, Star, Rocket, Sparkles, ChevronRight, Upload, Loader2, CheckCirc
 import { AnimatedHeading, AnimatedParagraph, AnimatedButton } from './animations';
 import { scoreMyResume } from '../services/api';
 
-const professionalHandshake = '/assets/professional_handshake_greeting.jpeg';
-const candidateSourcing = '/assets/candidate_recruitment_sourcing.jpeg';
-const digitalWorkplace = '/assets/recruitment_digital_workplace.jpeg';
-const recruitmentScreening = '/assets/recruitment_process_screening.jpeg';
+const client1 = '/assets(2)/client_1.jpg';
+const client2 = '/assets(2)/client2.jpg';
+const client3 = '/assets(2)/client3.jpg';
 
 export function ResumeSection() {
   const [triggerSequence, setTriggerSequence] = useState(false);
@@ -225,27 +224,18 @@ export function ResumeSection() {
             <div className="flex -space-x-2.5">
               <img
                 className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-sm"
-                src={professionalHandshake}
-                alt="Reviewer"
-                
+                src={client1}
+                alt="Client 1"
               />
               <img
                 className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-sm"
-                src={candidateSourcing}
-                alt="Reviewer"
-                
+                src={client2}
+                alt="Client 2"
               />
               <img
                 className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-sm"
-                src={digitalWorkplace}
-                alt="Reviewer"
-                
-              />
-              <img
-                className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-sm"
-                src={recruitmentScreening}
-                alt="Reviewer"
-                
+                src={client3}
+                alt="Client 3"
               />
             </div>
             
@@ -401,7 +391,7 @@ export function ResumeSection() {
                 <div className="flex justify-center mt-0.5">
                   <img
                     className="w-9 h-9 rounded-full border border-slate-700 object-cover shadow-sm"
-                    src={recruitmentScreening}
+                    src={client2}
                     alt="Jessica Pearson"
                     
                   />

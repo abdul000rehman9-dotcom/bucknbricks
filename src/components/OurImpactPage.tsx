@@ -3,7 +3,7 @@ import { motion, useInView } from "motion/react";
 import { JourneyTimeline } from "./JourneyTimeline";
 import { Contact } from "./Contact";
 import { AnimatedHeading, AnimatedParagraph } from "./animations";
-const globalRecruitmentNetwork = "/assets/global_recruitment_network.jpeg";
+const globalRecruitmentNetwork = "/assets(2)/hr_talent_recruitment_1.png";
 
 const springConfig = { damping: 20, stiffness: 120, mass: 0.8 };
 
@@ -225,14 +225,14 @@ export function OurImpactPage() {
           </AnimatedParagraph>
         </div>
 
-        <div className="max-w-5xl mx-auto mt-12 sm:mt-16 rounded-[32px] overflow-hidden shadow-2xl border border-slate-100 relative bg-slate-100 aspect-[16/9] md:aspect-[2.1/1]">
+        <div className="max-w-5xl mx-auto mt-12 sm:mt-16 rounded-[32px] overflow-hidden shadow-2xl border border-slate-100 relative bg-[#0b132a] aspect-[16/9] md:aspect-[2.1/1] flex items-center justify-center">
           <motion.img
-            initial={{ opacity: 0, scale: 1.03 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
             src={globalRecruitmentNetwork}
             alt="Our Impact Presentation Work Meeting"
-            className="w-full h-full object-cover origin-center relative z-10"
+            className="w-full h-full object-cover relative z-10"
           />
         </div>
       </section>

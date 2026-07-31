@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { Send, Sparkles, CheckCircle } from 'lucide-react';
 import { AnimatedHeading, AnimatedParagraph, AnimatedButton, StaggerContainer, StaggerItem } from './animations';
 import { submitContactMessage } from '../services/api';
-const professionalHandshake = '/assets/professional_handshake_greeting.jpeg';
+const professionalHandshake = '/assets(2)/contact_handshake.jpg';
 
 export function Contact() {
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -209,13 +209,12 @@ export function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: false, margin: '-10% 0px' }}
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-3xl aspect-[1.1] w-full max-w-[460px] overflow-hidden border-4 border-white shadow-2xl relative bg-slate-150"
+            className="rounded-3xl aspect-[1.1] w-full max-w-[460px] overflow-hidden border-4 border-white shadow-2xl relative bg-[#0b132a] flex items-center justify-center"
           >
             <img
               src={professionalHandshake}
               alt="Professional Handshake Greeting"
               className="w-full h-full object-cover brightness-95"
-              
             />
           </motion.div>
         </div>
