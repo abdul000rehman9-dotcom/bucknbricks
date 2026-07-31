@@ -12,7 +12,7 @@ const execSearchIcon = "/assets/excutive_cards.png";
 const recruitSolIcon = '/assets/Recruitment_cards.png';
 const hrConsultingIcon = "/assets/consulting_cards.png";
 const learningDevIcon = "/assets/learning_cards.png";
-const candidateSourcing = "/assets/candidate_recruitment_sourcing.jpeg";
+const candidateSourcing = "/assets/candidateSourcing.jpeg";
 
 interface ServicesProps {
   onServiceSelect?: (
