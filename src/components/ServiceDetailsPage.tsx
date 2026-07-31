@@ -5,17 +5,17 @@ import { AnimatedHeading, StaggerContainer, StaggerItem } from './animations';
 import { Vacancies } from './Vacancies';
 import { Contact } from './Contact';
 
-const executiveSearchHeroImg = '/assets(2)/executive_search_hero.jpg';
-const executiveSearchDetailImg = '/assets(2)/executive_search_detail.jpg';
+const executiveSearchHeroImg = '/assets/executiveSearchHeroImg.jpg';
+const executiveSearchDetailImg = '/assets/executiveSearchDetailImg.jpeg';
 
-const recruitmentSolutionHeroImg = '/assets(2)/recruitment_solution_hero.jpg';
-const recruitmentSolutionDetailImg = '/assets(2)/recruitment_solution_detail.jpg';
+const recruitmentSolutionHeroImg = '/assets/recruitmentSolutionHeroImg.jpeg';
+const recruitmentSolutionDetailImg = '/assets/recruitmentSolutionDetailImg.jpeg';
 
-const hrConsultingHeroImg = '/assets(2)/hr_consulting_hero.jpg';
-const hrConsultingDetailImg = '/assets(2)/hr_consulting_detail.jpg';
+const hrConsultingHeroImg = '/assets/hrConsultingHeroImg.jpeg';
+const hrConsultingDetailImg = '/assets/hrConsultingDetailImg.jpeg';
 
-const learningDevelopmentHeroImg = '/assets(2)/learning_development_hero.jpg';
-const learningDevelopmentDetailImg = '/assets(2)/learning_development_detail.jpg';
+const learningDevelopmentHeroImg = '/assets/learningDevelopmentHeroImg.jpeg';
+const learningDevelopmentDetailImg = '/assets/learningDevelopmentDetailImg.jpeg';
 
 interface ServiceDetailsPageProps {
   serviceType: 'executive-search' | 'recruitment-solution' | 'hr-consulting' | 'learning-development';
@@ -121,7 +121,7 @@ export function ServiceDetailsPage({ serviceType }: ServiceDetailsPageProps) {
                 transition={{ duration: 1.6, ease: 'easeOut', delay: 0.1 }}
                 src={heroImg}
                 alt={title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-fit"
               />
           </div>
         </div>
@@ -149,7 +149,7 @@ export function ServiceDetailsPage({ serviceType }: ServiceDetailsPageProps) {
                 <img
                   src={detailImg}
                   alt={title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-fit"
                 />
               </motion.div>
             </div>

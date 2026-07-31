@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { AnimatedHeading, AnimatedParagraph, AnimatedButton } from './animations';
-const hrTalentRecruitment = '/assets(2)/hero_talent_recruitment.jpg';
+const hrTalentRecruitment = '/assets/hero_section.JPG';
 
 interface CircularProgressBadgeProps {
   isLoaded: boolean;

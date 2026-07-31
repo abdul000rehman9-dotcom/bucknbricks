@@ -1,9 +1,9 @@
-
 import React from 'react';
 import { motion } from 'motion/react';
-import { Check, Sparkles } from 'lucide-react';
-import { AnimatedHeading, AnimatedParagraph, ImageReveal, StaggerContainer, StaggerItem } from './animations';
-const partnershipHandshake = '/assets(2)/why_choose_us_handshake.jpg';
+import { Check } from 'lucide-react';
+import { AnimatedHeading, AnimatedParagraph, StaggerContainer, StaggerItem } from './animations';
+
+const partnershipHandshake = '/assets/WhyChooseUs.jpg';
 
 export function WhyChooseUs() {
   const pillars = [
@@ -31,28 +31,29 @@ export function WhyChooseUs() {
 
   return (
     <section id="why-choose-us" className="relative py-20 sm:py-28 bg-[#ffffff] overflow-hidden">
+      {/* Grid vertically centered */}
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
-        {/* Left Side: Solid Grey Image Placeholder per reference image */}
-        <div className="lg:col-span-6 order-2 lg:order-1">
+        {/* Left Side Image: Slightly reduced height (Balanced size) */}
+        <div className="lg:col-span-6 order-2 lg:order-1 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: false, margin: '-50px' }}
             style={{ willChange: 'transform, opacity' }}
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-3xl aspect-[4/3] w-full overflow-hidden shadow-xl border border-slate-200/50 relative bg-[#0b132a] flex items-center justify-center select-none"
+            className="rounded-3xl w-full min-h-[480px] max-h-[680px] overflow-hidden shadow-xl border border-slate-200/50 relative bg-[#0b132a] select-none"
           >
             <img
               src={partnershipHandshake}
               alt="Why Choose Bucks & Bricks"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-fit"
             />
           </motion.div>
         </div>
 
-        {/* Right Side: Copy & Bullet Points */}
-        <div className="lg:col-span-6 order-1 lg:order-2 flex flex-col items-start text-left">
+        {/* Right Side Content */}
+        <div className="lg:col-span-6 order-1 lg:order-2 flex flex-col justify-center items-start text-left">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -77,7 +78,7 @@ export function WhyChooseUs() {
             For over a decade, Bucks & Bricks has been helping organizations solve their talent challenges through strategic recruitment, executive search, HR consulting, and workforce development solutions.
           </AnimatedParagraph>
 
-          {/* Bullet Points (Stagger Upward) */}
+          {/* Bullet Points */}
           <StaggerContainer className="flex flex-col gap-6 w-full">
             {pillars.map((pillar, idx) => (
               <div key={idx} className="w-full">

@@ -4,8 +4,8 @@ import { StaggerContainer, StaggerItem } from './animations';
 import { Vacancies } from './Vacancies';
 import { Contact } from './Contact';
 
-const recruitmentSolutionImg = '/assets(2)/career_recruitment_solution.jpg';
-const specialistImg = '/assets(2)/career_specialist.jpg';
+const recruitmentSolutionImg = '/assets/Career.jpg';
+const specialistImg = '/assets/Details.jpeg';
 
 export function CareerPage() {
   useEffect(() => {
@@ -73,7 +73,7 @@ export function CareerPage() {
             <img
               src={recruitmentSolutionImg}
               alt="Grow Your Skills With Our Team"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-fit"
             />
           </motion.div>
         </div>

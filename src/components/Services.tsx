@@ -8,11 +8,11 @@ import {
   StaggerItem,
 } from "./animations";
 
-const execSearchIcon = "/assets(2)/excutive_cards.png";
-const recruitSolIcon = '/assets(2)/Recruitment_cards.png';
-const hrConsultingIcon = "/assets(2)/consulting_cards.png";
-const learningDevIcon = "/assets(2)/learning_cards.png";
-const candidateSourcing = "/assets(2)/services_candidate_sourcing.jpg";
+const execSearchIcon = "/assets/excutive_cards.png";
+const recruitSolIcon = '/assets/Recruitment_cards.png';
+const hrConsultingIcon = "/assets/consulting_cards.png";
+const learningDevIcon = "/assets/learning_cards.png";
+const candidateSourcing = "/assets/candidate_recruitment_sourcing.jpeg";
 
 interface ServicesProps {
   onServiceSelect?: (

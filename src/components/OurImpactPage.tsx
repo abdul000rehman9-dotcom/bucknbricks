@@ -3,7 +3,7 @@ import { motion, useInView } from "motion/react";
 import { JourneyTimeline } from "./JourneyTimeline";
 import { Contact } from "./Contact";
 import { AnimatedHeading, AnimatedParagraph } from "./animations";
-const globalRecruitmentNetwork = "/assets(2)/hr_talent_recruitment_1.png";
+const globalRecruitmentNetwork = "/assets/Our_Impact.jpeg";
 
 const springConfig = { damping: 20, stiffness: 120, mass: 0.8 };
 
@@ -232,7 +232,7 @@ export function OurImpactPage() {
             transition={{ duration: 1, ease: "easeOut" }}
             src={globalRecruitmentNetwork}
             alt="Our Impact Presentation Work Meeting"
-            className="w-full h-full object-cover relative z-10"
+            className="w-full h-full object-fit relative z-10"
           />
         </div>
       </section>

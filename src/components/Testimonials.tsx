@@ -6,9 +6,9 @@ import { ChevronUp, ChevronDown, Quote, Sparkles } from 'lucide-react';
 import { AnimatedHeading, AnimatedParagraph, AnimatedButton } from './animations';
 import { Testimonial } from '../types';
 
-const client1 = '/assets(2)/client_1.jpg';
-const client2 = '/assets(2)/client2.jpg';
-const client3 = '/assets(2)/client3.jpg';
+const client1 = '/assets/client_1.jpg';
+const client2 = '/assets/client2.jpg';
+const client3 = '/assets/client3.jpg';
 
 export function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);

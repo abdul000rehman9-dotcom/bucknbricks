@@ -10,10 +10,10 @@ import {
 } from "./animations";
 import { TeamMember } from "../types";
 
-const team1 = '/assets(2)/team-1.jpg';
-const team2 = '/assets(2)/team-2.jpg';
-const team3 = '/assets(2)/team-3.jpg';
-const team4 = '/assets(2)/team-4.jpg';
+const team1 = '/assets/team-1.jpg';
+const team2 = '/assets/team-2.jpg';
+const team3 = '/assets/team-3.jpg';
+const team4 = '/assets/team-4.jpg';
 
 export function Team() {
   const [activeId, setActiveId] = useState<string>("1");

@@ -4,9 +4,9 @@ import { Calendar, ArrowUpRight } from 'lucide-react';
 import { AnimatedHeading, AnimatedParagraph } from './animations';
 import { BlogPost } from '../types';
 
-const blogImg1 = '/assets(2)/blog_job_search_tips.jpg';
-const blogImg2 = '/assets(2)/blog_competition_jobs.jpg';
-const blogImg3 = '/assets(2)/blog_foreign_workers.jpg';
+const blogImg1 = '/assets/job_search_concept.jpeg';
+const blogImg2 = '/assets/hiring_recruitment_concept.jpeg';
+const blogImg3 = '/assets/recruitment_process.jpeg';
 
 const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
 

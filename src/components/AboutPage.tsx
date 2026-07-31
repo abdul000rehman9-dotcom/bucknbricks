@@ -5,9 +5,9 @@ import { AnimatedHeading, AnimatedParagraph, StaggerContainer, StaggerItem } fro
 import { Team } from './Team';
 import { JourneyTimeline } from './JourneyTimeline';
 import { Contact } from './Contact';
-const officeCollaboration = '/assets(2)/about_office_collaboration.jpg';
-const heroBannerImg = '/assets(2)/about_hero_banner.jpg';
-const digitalWorkplace = '/assets(2)/about_digital_workplace.jpg';
+const officeCollaboration = '/assets/About_details.jpeg';
+const heroBannerImg = '/assets/About_us.jpeg';
+const digitalWorkplace = '/assets/our_mission.jpg';
 
 export function AboutPage() {
   useEffect(() => {
@@ -58,7 +58,7 @@ export function AboutPage() {
               transition={{ duration: 1.6, ease: 'easeOut', delay: 0.1 }}
               src={heroBannerImg}
               alt="Building Teams. Creating Futures."
-              className="w-full h-full object-cover"
+              className="w-full h-full object-fit "
             />
           </div>
         </div>
@@ -88,7 +88,7 @@ export function AboutPage() {
                 <img
                   src={officeCollaboration}
                   alt="Professional Specialist Working"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-fit "
                 />
               </motion.div>
             </div>
@@ -183,7 +183,7 @@ export function AboutPage() {
               <img
                 src={digitalWorkplace}
                 alt="Keyboard Typing Hands"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-fit transition-transform duration-500 group-hover:scale-105"
               />
             </motion.div>
 

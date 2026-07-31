@@ -6,8 +6,8 @@ import { Contact } from './Contact';
 import { JourneyTimeline } from './JourneyTimeline';
 import { AnimatedHeading, AnimatedParagraph, AnimatedButton } from './animations';
 
-const professionalHandshake = '/assets(2)/ceo_professional_handshake.jpg';
-const digitalWorkplace = '/assets(2)/ceo_digital_workplace.jpg';
+const professionalHandshake = '/assets/Ceo.jpg';
+const digitalWorkplace = '/assets/Our_vision.jpg';
 
 // Smooth spring animation config for luxury feel
 const springConfig = { damping: 30, stiffness: 120, mass: 0.8 };
@@ -174,11 +174,11 @@ export function CEOPage() {
         {/* Hero content grid */}
         <div className="relative z-20 max-w-6xl w-full mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Subtle 3D Tilt Image with Soft floating animation */}
+          {/* Left Column: Image with Increased Height */}
           <div className="md:col-span-5 flex justify-center">
             <motion.div
               style={{ y: imageScrollY }}
-              className="w-full max-w-[420px]"
+              className="w-full max-w-[440px]"
             >
               {/* Soft floating animation */}
               <motion.div
@@ -198,7 +198,11 @@ export function CEOPage() {
                   rotateY: smoothRotateY,
                   transformStyle: 'preserve-3d',
                 }}
-                className="relative aspect-square w-full rounded-[32px] overflow-hidden shadow-2xl bg-[#0b132a] group cursor-grab active:cursor-grabbing border border-slate-200/40 flex items-center justify-center"
+                /* 
+                  - aspect-[4/5] set kiya hai (square aspect-square ki jagah)
+                  - h-[480px] sm:h-[540px] explicit height di hai vertical height badhane ke liye
+                */
+                className="relative aspect-[4/5] h-[480px] sm:h-[540px] w-full rounded-[32px] overflow-hidden shadow-2xl bg-[#0b132a] group cursor-grab active:cursor-grabbing border border-slate-200/40 flex items-center justify-center"
               >
                 {/* Clean, high-contrast styled image */}
                 <img
@@ -357,7 +361,7 @@ export function CEOPage() {
               <img
                 src={digitalWorkplace}
                 alt="Digital Workplace Collaboration"
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-full object-fit transition-transform duration-500 group-hover:scale-105"
               />
             </motion.div>
 

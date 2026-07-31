@@ -7,13 +7,13 @@ import { Contact } from './Contact';
 import { AnimatedHeading, AnimatedParagraph } from './animations';
 import { BlogPost } from '../types';
 
-const blogImg1 = '/assets(2)/blog_job_search_tips.jpg';
-const blogImg2 = '/assets(2)/blog_competition_jobs.jpg';
-const blogImg3 = '/assets(2)/blog_foreign_workers.jpg';
-const blogImg4 = '/assets(2)/blog_digital_agency.jpg';
-const blogImg5 = '/assets(2)/blog_data_protection.jpg';
-const blogImg6 = '/assets(2)/blog_workplace.jpg';
-const featuredBlogImg = '/assets(2)/blog_featured_recruitment.jpg';
+const blogImg1 = '/assets/blogImg1.jpg';
+const blogImg2 = '/assets/blogImg2.png';
+const blogImg3 = '/assets/blogImg3.jpg';
+const blogImg4 = '/assets/blogImg4.jpg';
+const blogImg5 = '/assets/blogImg5.jpg';
+const blogImg6 = '/assets/blogImg6.jpg';
+const featuredBlogImg = '/assets/featuredBlogImg.jpeg';
 
 const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
 
@@ -114,7 +114,7 @@ const BlogCard: React.FC<{ post: BlogPost; index: number }> = ({ post, index }) 
             y: imageY,
             scale: smoothScale,
           }}
-          className="w-full h-full object-cover origin-center"
+          className="w-full h-full object-fit origin-center"
         />
         <span className="absolute top-4 left-4 z-20 text-[10px] font-extrabold uppercase tracking-widest text-slate-800 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-sm">
           {post.category}
