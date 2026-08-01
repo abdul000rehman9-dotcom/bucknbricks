@@ -157,33 +157,6 @@ export function Team() {
           })}
         </div>
 
-        {/* Stats Row */}
-        <div className="mt-16 max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
-          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
-            <span className="block text-2xl font-bold font-display text-blue-600">500+</span>
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Successful Placements</span>
-          </div>
-          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
-            <span className="block text-2xl font-bold font-display text-blue-600">200+</span>
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Positions Closed</span>
-          </div>
-          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
-            <span className="block text-2xl font-bold font-display text-blue-600">50+</span>
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Trusted Clients</span>
-          </div>
-          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
-            <span className="block text-2xl font-bold font-display text-blue-600">10+</span>
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Industries Served</span>
-          </div>
-          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
-            <span className="block text-2xl font-bold font-display text-blue-600">95%</span>
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Client Satisfaction</span>
-          </div>
-          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
-            <span className="block text-2xl font-bold font-display text-blue-600">72 Hrs</span>
-            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Avg Shortlist Time</span>
-          </div>
-        </div>
 
         {/* Team Member Detail Modal */}
         <AnimatePresence>
