@@ -1,51 +1,58 @@
 
 import React, { useState } from "react";
-import { motion } from "motion/react";
-import { User, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { User, X, Briefcase, Award, CheckCircle } from "lucide-react";
 import {
   AnimatedHeading,
   AnimatedParagraph,
-  StaggerContainer,
-  StaggerItem,
 } from "./animations";
 import { TeamMember } from "../types";
 
-const team1 = '/assets/team-1.jpg';
-const team2 = '/assets/team-2.jpg';
-const team3 = '/assets/team-3.jpg';
-const team4 = '/assets/team-4.jpg';
+const team1 = '/assets/Team-1.jpeg';
+const team2 = '/assets/Team-2.jpeg';
+const team3 = '/assets/Team-3.jpeg';
+const team4 = '/assets/Team-4.jpeg';
+
+interface ExtendedTeamMember extends TeamMember {
+  quote: string;
+}
 
 export function Team() {
   const [activeId, setActiveId] = useState<string>("1");
+  const [selectedMember, setSelectedMember] = useState<ExtendedTeamMember | null>(null);
 
-  const team: TeamMember[] = [
+  const team: ExtendedTeamMember[] = [
     {
       id: "1",
-      name: "Mr. Mark",
-      role: "Talent Acquisition Director",
+      name: "Saima Yasir",
+      role: "Manager Business Operations",
       image: team1,
       bgColor: "bg-gradient-to-b from-sky-400/90 to-sky-600/95",
+      quote: "Working at Bucks n Bricks has given me the opportunity to contribute to an organization where operational excellence and strong client relationships go hand in hand. Every day, I collaborate with an exceptional team to streamline processes, enhance service delivery, and support businesses in achieving their talent goals. It is rewarding to be part of a company that values professionalism, innovation, and long term partnerships while making a meaningful impact on both clients and candidates.",
     },
     {
       id: "2",
-      name: "Nadia Lestary",
-      role: "Senior Recruiting Partner",
+      name: "Amna Jamal",
+      role: "HR Officer",
       image: team2,
       bgColor: "bg-gradient-to-b from-rose-400/90 to-rose-600/95",
+      quote: "Working at Bucks n Bricks has given me the opportunity to grow professionally while contributing to a collaborative and people-focused work environment. Being part of a team that is passionate about connecting exceptional talent with the right opportunities has strengthened my expertise in recruitment, talent management, and HR operations. I value working in an organization that encourages continuous learning, teamwork, and delivering meaningful solutions that create lasting value for both clients and candidates.",
     },
     {
       id: "3",
-      name: "Evan Caster Lee",
-      role: "HR Tech Systems Specialist",
+      name: "Aiman Farooqui",
+      role: "HR Officer",
       image: team3,
       bgColor: "bg-gradient-to-b from-teal-400/90 to-teal-600/95",
+      quote: "Working at Bucks n Bricks has provided me with valuable exposure to the fast-paced world of recruitment and talent acquisition. Collaborating with diverse clients across multiple industries has strengthened my ability to understand unique hiring requirements and deliver quality talent within dynamic business environments. The supportive culture and commitment to professional development have enhanced my communication, stakeholder management, and recruitment skills, making every experience both rewarding and impactful.",
     },
     {
       id: "4",
-      name: "Stefy Catlyna",
-      role: "Operations & Payroll Lead",
+      name: "Anum Naz",
+      role: "Recruitment Executive",
       image: team4,
       bgColor: "bg-gradient-to-b from-purple-400/90 to-purple-600/95",
+      quote: "Working at Bucks n Bricks has strengthened my expertise in talent acquisition, candidate sourcing, and end-to-end recruitment. Being part of a dynamic talent management firm has given me the opportunity to work with diverse clients and understand their unique hiring needs while connecting skilled professionals with meaningful career opportunities. I take pride in contributing to a seamless recruitment experience through proactive communication, collaboration, and a commitment to delivering exceptional talent solutions for both clients and candidates.",
     },
   ];
 
@@ -70,7 +77,7 @@ export function Team() {
             </span>
           </motion.div>
 
-          {/* Main Heading wrapped in a full-width container to force layout centering */}
+          {/* Main Heading */}
           <div className="w-full text-center flex justify-center">
             <AnimatedHeading
               text="Meet Our Team"
@@ -81,7 +88,7 @@ export function Team() {
           {/* Paragraph */}
           <AnimatedParagraph className="text-slate-500 font-sans text-sm sm:text-base leading-relaxed text-center mx-auto">
             The skilled HR experts behind our innovative services, helping you
-            manage, hire, and scale with ease.
+            manage, hire, and scale with ease. Click any member to view their details.
           </AnimatedParagraph>
         </div>
 
@@ -90,7 +97,6 @@ export function Team() {
           {team.map((member) => {
             const isActive = activeId === member.id;
 
-            // First is wide by default, others shrink. Hover transitions active card.
             const flexClass = isActive
               ? "md:flex-[2.5] flex-[2.0]"
               : "md:flex-[0.6] flex-[0.5]";
@@ -101,6 +107,7 @@ export function Team() {
                 layout
                 style={{ willChange: 'flex-grow, transform' }}
                 onMouseEnter={() => setActiveId(member.id)}
+                onClick={() => setSelectedMember(member)}
                 transition={{
                   type: "spring",
                   stiffness: 160,
@@ -111,20 +118,18 @@ export function Team() {
                 {/* Overlay background texture pattern */}
                 <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] bg-[size:10px_10px] mix-blend-overlay" />
 
-                {/* Team Image with beautiful overlay */}
+                {/* Team Image with overlay */}
                 <div className="absolute inset-0 z-0">
                   <img
                     src={member.image}
                     alt={member.name}
                     className="w-full h-full object-cover brightness-95 contrast-[1.02] transition-all duration-500"
-                    
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent" />
                 </div>
 
                 {/* Card Content Label */}
                 <div className="relative z-10 flex flex-col text-left h-full justify-end">
-                  {/* Bottom: Name */}
                   <div className="flex flex-col items-start gap-1 pb-2">
                     <motion.h4
                       layout="position"
@@ -137,18 +142,118 @@ export function Team() {
                     >
                       {member.name}
                     </motion.h4>
+                    <p className="text-white/80 font-sans text-xs sm:text-sm font-medium">
+                      {member.role}
+                    </p>
                   </div>
                 </div>
 
                 {/* Hover sparkle accent icon */}
-                <div className="absolute top-4 right-4 text-white/40 group-hover:text-white transition-colors duration-300">
+                <div className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors duration-300 bg-black/20 backdrop-blur-sm p-2 rounded-full">
                   <User size={16} />
                 </div>
               </motion.div>
             );
           })}
         </div>
+
+        {/* Stats Row */}
+        <div className="mt-16 max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
+          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+            <span className="block text-2xl font-bold font-display text-blue-600">500+</span>
+            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Successful Placements</span>
+          </div>
+          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+            <span className="block text-2xl font-bold font-display text-blue-600">200+</span>
+            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Positions Closed</span>
+          </div>
+          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+            <span className="block text-2xl font-bold font-display text-blue-600">50+</span>
+            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Trusted Clients</span>
+          </div>
+          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+            <span className="block text-2xl font-bold font-display text-blue-600">10+</span>
+            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Industries Served</span>
+          </div>
+          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+            <span className="block text-2xl font-bold font-display text-blue-600">95%</span>
+            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Client Satisfaction</span>
+          </div>
+          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+            <span className="block text-2xl font-bold font-display text-blue-600">72 Hrs</span>
+            <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Avg Shortlist Time</span>
+          </div>
+        </div>
+
+        {/* Team Member Detail Modal */}
+        <AnimatePresence>
+          {selectedMember && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                className="relative w-full max-w-2xl bg-white rounded-3xl overflow-hidden shadow-2xl border border-slate-100"
+              >
+                {/* Close Button */}
+                <button
+                  onClick={() => setSelectedMember(null)}
+                  className="absolute top-4 right-4 z-20 w-9 h-9 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-full flex items-center justify-center transition-colors"
+                >
+                  <X size={18} />
+                </button>
+
+                <div className="grid grid-cols-1 md:grid-cols-12">
+                  {/* Left Column: Image & Role */}
+                  <div className="md:col-span-5 relative bg-[#0b132a] min-h-[260px] md:min-h-full flex flex-col justify-end p-6">
+                    <img
+                      src={selectedMember.image}
+                      alt={selectedMember.name}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+                    
+                    <div className="relative z-10 text-white">
+                      <h3 className="text-2xl font-bold font-display text-sky-300 mb-1">
+                        {selectedMember.name}
+                      </h3>
+                      <p className="text-sm font-medium text-slate-200">
+                        {selectedMember.role}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Statement & Details */}
+                  <div className="md:col-span-7 p-6 sm:p-8 flex flex-col justify-between text-left">
+                    <div>
+                      <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full mb-4">
+                        Team Member Profile
+                      </span>
+                      
+                      <h4 className="text-lg font-bold font-display text-[#011c30] mb-3">
+                        About & Statement
+                      </h4>
+
+                      <blockquote className="text-slate-600 font-sans text-xs sm:text-sm leading-relaxed italic border-l-2 border-blue-500 pl-3 py-1">
+                        "{selectedMember.quote}"
+                      </blockquote>
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-sans">
+                      <span className="flex items-center gap-1">
+                        <CheckCircle size={14} className="text-emerald-500" /> Dedicated HR Specialist
+                      </span>
+                      <span className="font-semibold text-slate-700">Bucks n Bricks</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
       </div>
     </section>
   );
 }
+

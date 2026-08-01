@@ -234,6 +234,7 @@ export function StaggerItem({
   children: React.ReactNode;
   className?: string;
   direction?: SlideDirection;
+  key?: React.Key;
 }) {
   const offset = slideOffsets[direction];
   

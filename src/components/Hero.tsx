@@ -157,7 +157,7 @@ export function Hero() {
           />
 
           <AnimatedParagraph delay={0.9} className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl mb-8">
-            From Executive Search to Recruitment, HR Consulting, and Learning & Development, Bucks & Bricks helps organizations attract, hire, and develop exceptional talent that drives business success.
+            From Executive Search to Recruitment Solutions, HR Consulting, and Learning & Development, Bucks n Bricks partners with organizations to attract, hire, and develop exceptional talent that drives sustainable business success. We don't just fill positions, we build long-term talent strategies that help businesses grow.
           </AnimatedParagraph>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -173,7 +173,7 @@ export function Hero() {
               }}
               className="bg-[#052842] hover:bg-white hover:text-[#052842] border border-[#052842] text-white font-sans text-sm font-semibold py-3.5 px-6 rounded shadow-md transition-all duration-200 cursor-pointer"
             >
-              Request a Talent
+              Hire Top Talent
             </AnimatedButton>
             <AnimatedButton
               delay={1.4}
@@ -225,6 +225,10 @@ export function Hero() {
                 alt="Professional HR Specialist"
                 className="w-full h-full object-cover object-center"
                 onLoad={() => setIsHeroLoaded(true)}
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/assets/hero.jpg';
+                  setIsHeroLoaded(true);
+                }}
               />
             </motion.div>
 

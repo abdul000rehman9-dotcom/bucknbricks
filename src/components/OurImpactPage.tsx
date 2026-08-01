@@ -74,27 +74,27 @@ export function OurImpactPage() {
     {
       id: "val-1",
       title: "Integrity",
-      subtitle: "Relationships based on honesty & trust",
+      subtitle: "We build lasting relationships through honesty, transparency, and ethical business practices.",
     },
     {
       id: "val-2",
       title: "Excellence",
-      subtitle: "Quality in every search & solution",
+      subtitle: "We strive for quality in every search, every partnership, and every placement.",
     },
     {
       id: "val-3",
-      title: "Innovation",
-      subtitle: "Modern recruitment practices",
+      title: "Partnership",
+      subtitle: "We work as an extension of our clients' teams, understanding their business before recommending talent.",
     },
     {
       id: "val-4",
-      title: "Partnership",
-      subtitle: "Extension of client teams",
+      title: "Innovation",
+      subtitle: "We continuously embrace modern recruitment practices, market intelligence, and technology to deliver smarter hiring solutions.",
     },
     {
       id: "val-5",
       title: "People First",
-      subtitle: "Exceptional people at our heart",
+      subtitle: "Whether serving organizations or professionals, we place people at the heart of every decision.",
     },
   ]);
 
@@ -262,13 +262,13 @@ export function OurImpactPage() {
                 initial="hidden"
                 animate={isStatsInView ? "visible" : "hidden"}
                 variants={statCardTopVariants}
-                className="bg-[#f8fafc] border border-slate-100 rounded-3xl p-6 sm:p-8 flex flex-col justify-between text-left shadow-sm min-h-[160px]"
+                className="bg-[#f8fafc] border border-slate-100 rounded-3xl p-6 sm:p-8 flex flex-col justify-between text-left shadow-sm min-h-[150px]"
               >
                 <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#011c30] tracking-tight mb-2">
-                  <StatCounter value={15} suffix="+" />
+                  <StatCounter value={500} suffix="+" />
                 </h3>
                 <p className="text-xs sm:text-sm font-semibold text-slate-500 font-sans leading-snug">
-                  Year of Industry Experience
+                  Successful Placements
                 </p>
               </motion.div>
 
@@ -276,43 +276,71 @@ export function OurImpactPage() {
                 initial="hidden"
                 animate={isStatsInView ? "visible" : "hidden"}
                 variants={statCardBottomVariants}
-                className="bg-[#f8fafc] border border-slate-100 rounded-3xl p-6 sm:p-8 flex flex-col justify-between text-left shadow-sm min-h-[160px]"
+                className="bg-[#f8fafc] border border-slate-100 rounded-3xl p-6 sm:p-8 flex flex-col justify-between text-left shadow-sm min-h-[150px]"
               >
                 <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#011c30] tracking-tight mb-2">
-                  <StatCounter value={30} suffix="+" />
+                  <StatCounter value={200} suffix="+" />
                 </h3>
                 <p className="text-xs sm:text-sm font-semibold text-slate-500 font-sans leading-snug">
-                  Partner Organizations
+                  Positions Closed
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial="hidden"
+                animate={isStatsInView ? "visible" : "hidden"}
+                variants={statCardBottomVariants}
+                className="bg-[#f8fafc] border border-slate-100 rounded-3xl p-6 sm:p-8 flex flex-col justify-between text-left shadow-sm min-h-[150px]"
+              >
+                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#011c30] tracking-tight mb-2">
+                  <StatCounter value={50} suffix="+" />
+                </h3>
+                <p className="text-xs sm:text-sm font-semibold text-slate-500 font-sans leading-snug">
+                  Trusted Clients
                 </p>
               </motion.div>
             </div>
 
-            <div className="flex flex-col gap-6 lg:translate-y-12">
+            <div className="flex flex-col gap-6 lg:translate-y-8">
               <motion.div
                 initial="hidden"
                 animate={isStatsInView ? "visible" : "hidden"}
                 variants={statCardTopVariants}
-                className="bg-[#f8fafc] border border-slate-100 rounded-3xl p-6 sm:p-8 flex flex-col justify-between text-left shadow-sm min-h-[160px]"
-              >
-                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#011c30] tracking-tight mb-2">
-                  <StatCounter value={100} />
-                </h3>
-                <p className="text-xs sm:text-sm font-semibold text-slate-500 font-sans leading-snug">
-                  Successful Placement
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial="hidden"
-                animate={isStatsInView ? "visible" : "hidden"}
-                variants={statCardBottomVariants}
-                className="bg-[#f8fafc] border border-slate-100 rounded-3xl p-6 sm:p-8 flex flex-col justify-between text-left shadow-sm min-h-[160px]"
+                className="bg-[#f8fafc] border border-slate-100 rounded-3xl p-6 sm:p-8 flex flex-col justify-between text-left shadow-sm min-h-[150px]"
               >
                 <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#011c30] tracking-tight mb-2">
                   <StatCounter value={10} suffix="+" />
                 </h3>
                 <p className="text-xs sm:text-sm font-semibold text-slate-500 font-sans leading-snug">
                   Industries Served
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial="hidden"
+                animate={isStatsInView ? "visible" : "hidden"}
+                variants={statCardBottomVariants}
+                className="bg-[#f8fafc] border border-slate-100 rounded-3xl p-6 sm:p-8 flex flex-col justify-between text-left shadow-sm min-h-[150px]"
+              >
+                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#011c30] tracking-tight mb-2">
+                  <StatCounter value={95} suffix="%" />
+                </h3>
+                <p className="text-xs sm:text-sm font-semibold text-slate-500 font-sans leading-snug">
+                  Client Satisfaction
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial="hidden"
+                animate={isStatsInView ? "visible" : "hidden"}
+                variants={statCardBottomVariants}
+                className="bg-[#f8fafc] border border-slate-100 rounded-3xl p-6 sm:p-8 flex flex-col justify-between text-left shadow-sm min-h-[150px]"
+              >
+                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-display text-[#011c30] tracking-tight mb-2">
+                  <StatCounter value={72} suffix=" Hrs" />
+                </h3>
+                <p className="text-xs sm:text-sm font-semibold text-slate-500 font-sans leading-snug">
+                  Average Shortlisting Time
                 </p>
               </motion.div>
             </div>
@@ -355,14 +383,14 @@ export function OurImpactPage() {
                     boxShadow: "0 20px 30px rgba(0, 0, 0, 0.08)",
                     cursor: "grabbing",
                   }}
-                  className={`p-6 sm:p-8 bg-white border border-slate-100/90 rounded-[24px] shadow-sm flex flex-col justify-center items-center text-center cursor-grab active:cursor-grabbing select-none relative min-h-[140px] hover:border-blue-100 transition-colors duration-200 w-full ${
+                  className={`p-6 sm:p-7 bg-white border border-slate-100/90 rounded-[24px] shadow-sm flex flex-col justify-center items-center text-center cursor-grab active:cursor-grabbing select-none relative min-h-[160px] hover:border-blue-100 transition-colors duration-200 w-full ${
                     idx === 4 ? "col-span-1" : ""
-                  } ${idx % 2 === 1 ? "lg:translate-y-10" : ""}`}
+                  } ${idx % 2 === 1 ? "lg:translate-y-6" : ""}`}
                 >
-                  <h4 className="text-lg sm:text-xl font-bold font-display text-[#011c30] tracking-tight mb-1">
+                  <h4 className="text-lg sm:text-xl font-bold font-display text-[#011c30] tracking-tight mb-2">
                     {card.title}
                   </h4>
-                  <p className="text-[11px] sm:text-xs font-semibold text-slate-400 font-sans uppercase tracking-wider">
+                  <p className="text-xs sm:text-sm font-normal text-slate-600 font-sans leading-relaxed">
                     {card.subtitle}
                   </p>
                 </motion.div>

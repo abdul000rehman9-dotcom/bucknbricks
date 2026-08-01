@@ -14,6 +14,7 @@ const hrConsultingIcon = "/assets/consulting_cards.png";
 const learningDevIcon = "/assets/learning_cards.png";
 const candidateSourcing = "/assets/candidateSourcing.jpeg";
 
+
 interface ServicesProps {
   onServiceSelect?: (
     serviceType:
@@ -70,14 +71,16 @@ export function Services({ onServiceSelect }: ServicesProps) {
     >
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Heading */}
-        <div className="text-center mb-16 max-w-2xl mx-auto">
+        <div className="text-center mb-16 max-w-3xl mx-auto">
           <AnimatedHeading
             text="Our Services"
             className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-[#011c30] tracking-tight leading-tight mb-4 text-center"
           />
-          <AnimatedParagraph className="text-slate-500 font-sans text-sm sm:text-base leading-relaxed">
-            Tailored HR and talent acquisition solutions designed to empower
-            your organization and accelerate growth.
+          <AnimatedParagraph className="text-slate-600 font-sans text-sm sm:text-base md:text-lg leading-relaxed">
+            Finding exceptional talent requires more than simply filling vacancies. It requires
+            understanding business strategy, organizational culture, and future workforce needs.
+            Our comprehensive talent solutions help organizations attract, assess, hire, and
+            develop professionals who create measurable business value.
           </AnimatedParagraph>
         </div>
 
@@ -188,51 +191,54 @@ export function Services({ onServiceSelect }: ServicesProps) {
           </motion.div>
         </motion.div>
 
-        {/* Bottom Detailed Split Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          <div className="lg:col-span-6">
-            <ImageReveal
-              src={candidateSourcing}
-              alt="Developer working on laptop"
-              className="rounded-3xl aspect-[1.3] w-full shadow-lg"
+        {/* About Bucks & Bricks Section */}
+        <div id="about-home" className="pt-12 border-t border-slate-100">
+          <div className="text-center mb-12 max-w-3xl mx-auto">
+            <span className="text-[11px] font-bold text-blue-600 font-sans tracking-widest uppercase mb-2 inline-block">
+              Who We Are
+            </span>
+            <AnimatedHeading
+              text="About Bucks & Bricks"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-[#011c30] tracking-tight leading-tight text-center"
             />
           </div>
 
-          <div className="lg:col-span-6 flex flex-col text-left">
-            <StaggerContainer className="flex flex-col gap-0 divide-y divide-slate-150">
-              <StaggerItem direction="up">
-                <div className="pb-6 text-left">
-                  <h4 className="text-[#011c30] font-bold font-display text-base sm:text-lg mb-2">
-                    About Bucks & Bricks
-                  </h4>
-                  <p className="text-slate-500 font-sans text-xs sm:text-sm leading-relaxed">
-                    For over a decade, Bucks & Bricks has been helping
-                    organizations solve their talent challenges through
-                    strategic recruitment, executive search, HR consulting, and
-                    workforce development solutions.
-                  </p>
-                </div>
-              </StaggerItem>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-6">
+              <ImageReveal
+                src={candidateSourcing}
+                alt="About Bucks & Bricks"
+                className="rounded-3xl aspect-[1.3] w-full shadow-lg object-cover"
+              />
+            </div>
 
-              <StaggerItem direction="up">
-                <div className="py-6 text-left">
-                  <p className="text-slate-500 font-sans text-xs sm:text-sm leading-relaxed">
-                    Our mission is simple: connect businesses with exceptional
-                    people and help professionals build rewarding careers.
+            <div className="lg:col-span-6 flex flex-col justify-center text-left">
+              <StaggerContainer className="flex flex-col gap-4 text-slate-600 font-sans text-sm sm:text-base leading-relaxed">
+                <StaggerItem direction="up">
+                  <p className="text-slate-600 leading-relaxed font-sans text-sm sm:text-base">
+                    At Bucks n Bricks, we believe that every successful organization is built by exceptional people. Since our inception, we have partnered with businesses to solve their most critical talent challenges by connecting them with professionals who create lasting value.
                   </p>
-                </div>
-              </StaggerItem>
+                </StaggerItem>
 
-              <StaggerItem direction="up">
-                <div className="pt-6 text-left">
-                  <p className="text-slate-500 font-sans text-xs sm:text-sm leading-relaxed">
-                    We work as atrue business partner, understanding our
-                    clients' goals and delivering customized solutions that
-                    create measurable impact.
+                <StaggerItem direction="up">
+                  <p className="text-slate-600 leading-relaxed font-sans text-sm sm:text-base">
+                    As a trusted Talent Management Solutions firm, we specialize in Executive Search, Recruitment Solutions, HR Consulting, and Learning & Development, helping organizations build high-performing teams while enabling professionals to advance meaningful careers.
                   </p>
-                </div>
-              </StaggerItem>
-            </StaggerContainer>
+                </StaggerItem>
+
+                <StaggerItem direction="up">
+                  <p className="text-slate-600 leading-relaxed font-sans text-sm sm:text-base">
+                    Our approach extends beyond recruitment. We work closely with every client to understand their business strategy, organizational culture, and long-term objectives, allowing us to deliver talent solutions that create measurable impact.
+                  </p>
+                </StaggerItem>
+
+                <StaggerItem direction="up">
+                  <p className="text-slate-600 leading-relaxed font-sans text-sm sm:text-base">
+                    From leadership hiring and workforce planning to organizational development, we remain committed to building partnerships founded on trust, integrity, and excellence.
+                  </p>
+                </StaggerItem>
+              </StaggerContainer>
+            </div>
           </div>
         </div>
       </div>

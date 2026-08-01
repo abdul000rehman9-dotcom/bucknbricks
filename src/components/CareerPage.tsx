@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion } from 'motion/react';
+import { ArrowRight } from 'lucide-react';
 import { StaggerContainer, StaggerItem } from './animations';
 import { Vacancies } from './Vacancies';
 import { Contact } from './Contact';
@@ -79,10 +80,10 @@ export function CareerPage() {
         </div>
       </section>
 
-      {/* Amazing Benefits Section */}
+      {/* Careers Section */}
       <section className="relative py-16 sm:py-24 bg-white overflow-hidden border-t border-b border-slate-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-16 text-center">
+          <div className="mb-12 text-center">
             {/* Reusable slide up and fade text */}
             <motion.h2
               initial="hidden"
@@ -98,7 +99,7 @@ export function CareerPage() {
               }}
               className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-[#011c30] tracking-tight text-center"
             >
-              Amazing Benefits To Boost Your Career
+              Careers Section
             </motion.h2>
           </div>
 
@@ -113,7 +114,7 @@ export function CareerPage() {
               >
                 <img
                   src={specialistImg}
-                  alt="Professional Specialist Working"
+                  alt="Careers at Bucks n Bricks"
                   className="w-full h-full object-cover"
                 />
               </motion.div>
@@ -122,30 +123,37 @@ export function CareerPage() {
             <div className="lg:col-span-6 flex flex-col items-start text-left">
               <StaggerContainer className="flex flex-col gap-6 w-full">
                 <StaggerItem direction="up" className="w-full">
-                  <div className="border-b border-slate-100 pb-6">
-                    <h3 className="text-[#011c30] font-bold font-display text-xl mb-2">Competitive Salary</h3>
-                    <p className="text-slate-600 font-sans text-xs sm:text-sm sm:leading-relaxed">
-                      Offer attractive and competitive salaries to retain top talent, motivate employees, and stay ahead in the market.
-                    </p>
-                  </div>
-                </StaggerItem>
-
-                <StaggerItem direction="up" className="w-full">
-                  <div className="border-b border-slate-100 pb-6">
-                    <h3 className="text-[#011c30] font-bold font-display text-xl mb-2">Wellness Programs</h3>
-                    <p className="text-slate-600 font-sans text-xs sm:text-sm sm:leading-relaxed">
-                      Implement comprehensive wellness programs that support employee health, boost engagement, and improve productivity.
+                  <div className="border-b border-slate-100 pb-4">
+                    <p className="text-slate-600 font-sans text-sm sm:text-base leading-relaxed">
+                      Whether you're an experienced professional or taking the next step in your career, Bucks n Bricks connects ambitious individuals with leading organizations across Pakistan and international markets.
                     </p>
                   </div>
                 </StaggerItem>
 
                 <StaggerItem direction="up" className="w-full">
                   <div className="pb-2">
-                    <h3 className="text-[#011c30] font-bold font-display text-xl mb-2">Hybrid Work Options</h3>
-                    <p className="text-slate-600 font-sans text-xs sm:text-sm sm:leading-relaxed">
-                      Offer flexible hybrid work options that balance remote and in-office schedules, enhancing employee satisfaction.
+                    <p className="text-slate-600 font-sans text-sm sm:text-base leading-relaxed">
+                      Explore opportunities where your skills, experience, and ambitions can make a lasting impact.
                     </p>
                   </div>
+                </StaggerItem>
+
+                <StaggerItem direction="up" className="w-full pt-2">
+                  <button
+                    onClick={() => {
+                      const el = document.getElementById('vacancies');
+                      if (el) {
+                        el.scrollIntoView({ behavior: 'smooth' });
+                      } else {
+                        window.location.hash = '#vacancies';
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 font-bold font-sans text-sm sm:text-base tracking-wide cursor-pointer group p-0 bg-transparent border-none transition-colors duration-200"
+                    style={{ color: '#89C7F5' }}
+                  >
+                    <span className="hover:underline">Browse Current Openings / Job Postings</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200" />
+                  </button>
                 </StaggerItem>
               </StaggerContainer>
             </div>

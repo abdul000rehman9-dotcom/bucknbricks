@@ -240,27 +240,29 @@ export function CEOPage() {
             {/* Main Paragraph Content */}
             <div className="space-y-4 text-slate-700 font-sans text-sm sm:text-base leading-relaxed mb-6">
               <p>
-                Founded by Arbab Wasi, Bucks & Bricks was established with a simple yet powerful vision — to redefine how organizations discover, attract, and develop talent.
+                At Bucks n Bricks, our journey has always been driven by one belief: great organizations are built by great people. This philosophy is at the heart of everything we do.
               </p>
 
               <p>
-                With extensive experience in recruitment, executive search, HR consulting, and organizational development, Arbab has partnered with leading organizations across diverse industries to solve hiring challenges and build high-performing teams.
+                Founded by Arbab Wasi, Bucks n Bricks was established with a clear purpose to redefine talent management by helping organizations attract exceptional professionals while creating meaningful career opportunities for individuals.
               </p>
 
-              <p className="font-medium text-slate-800">
-                His leadership is driven by one belief:
+              <p>
+                With years of experience in executive search, strategic recruitment, HR consulting, and organizational development, Arbab has worked closely with businesses across diverse industries, understanding that every hiring decision shapes an organization's future.
+              </p>
+
+              <p>
+                Under his leadership, Bucks n Bricks has evolved from a boutique recruitment firm into a trusted Talent Management Solutions partner, serving organizations across Pakistan while expanding its reach into the Kingdom of Saudi Arabia and the United Arab Emirates.
+              </p>
+
+              <p>
+                His leadership is built on collaboration, integrity, and a genuine commitment to creating value for both clients and candidates. Rather than focusing solely on filling vacancies, he believes in building long-term partnerships that contribute to sustainable business growth.
+              </p>
+
+              <p>
+                Today, Bucks n Bricks continues to help organizations strengthen their workforce through strategic hiring, leadership acquisition, HR consulting, and workforce development, remaining committed to delivering talent solutions that create lasting impact.
               </p>
             </div>
-
-            {/* Quote Block matching image styling */}
-            <blockquote className="border-l-[3px] border-blue-600 pl-4 py-1 italic text-blue-600 font-sans text-base sm:text-lg font-medium mb-6">
-              “Great businesses are built by great people. Our role is to connect organizations with the talent that drives lasting success.”
-            </blockquote>
-
-            {/* Closing Paragraph */}
-            <p className="text-slate-700 font-sans text-sm sm:text-base leading-relaxed mb-8">
-              Today, he continues to lead Bucks & Bricks with a commitment to innovation, integrity, and delivering people-first solutions that help both businesses and professionals thrive.
-            </p>
 
             {/* Counting blocks */}
             <div className="grid grid-cols-2 gap-5 w-full max-w-md">
@@ -345,7 +347,7 @@ export function CEOPage() {
                 Our Mission
               </h3>
               <p className="text-slate-300 font-sans text-xs sm:text-sm leading-relaxed">
-                To empower organizations with exceptional talent and innovative HR solutions while helping professionals build meaningful and rewarding careers.
+                To empower organizations by connecting them with exceptional talent while enabling professionals to build rewarding careers through innovative, ethical, and strategic talent management solutions.
               </p>
             </motion.div>
 
@@ -381,7 +383,7 @@ export function CEOPage() {
                 Our Vision
               </h3>
               <p className="text-slate-300 font-sans text-xs sm:text-sm leading-relaxed">
-                To become Pakistan's most trusted talent management and HR consulting partner, recognized for transforming workplaces through people, innovation, and long-term partnerships.
+                To become the region's most trusted talent management partner, recognized for transforming businesses through people, innovation, and long-term strategic partnerships
               </p>
             </motion.div>
           </div>

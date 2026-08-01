@@ -5,48 +5,83 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { AnimatedButton } from './animations';
-import logoImg from '/assets/logo-main.png';
+const logoImg = '/assets/logo-main.png';
+
+interface YearDetail {
+  year: string;
+  text: string;
+}
 
 interface TimelineMilestone {
   id: string;
   year: string;
   title: string;
-  contentParagraphs: string[];
+  yearDetails: YearDetail[];
 }
 
 export function JourneyTimeline() {
   const [activeMilestone, setActiveMilestone] = useState<string | null>(null);
 
-  // Full image text split paragraph-by-paragraph
-  const fullContent = [
-    "Since 2011, Bucks & Bricks has been helping organizations build stronger teams through strategic recruitment, executive search, HR consulting, and learning & development solutions.",
-    "What began as a recruitment consultancy has grown into a trusted HR partner for businesses across Pakistan, serving industries including FMCG, Pharmaceuticals, Banking, Manufacturing, Engineering, Textile, Hospitality, and Technology.",
-    "We believe recruitment is more than filling vacancies — it's about creating lasting partnerships, empowering people, and helping businesses achieve sustainable growth.",
-    "Today, we continue to connect exceptional talent with forward-thinking organizations, delivering customized workforce solutions that create measurable impact."
-  ];
-
   const milestones: TimelineMilestone[] = [
     {
       id: '1',
-      year: '2011',
-      title: 'Strategic Solutions',
-      contentParagraphs: fullContent,
+      year: '2009',
+      title: 'Foundations & Early Milestones',
+      yearDetails: [
+        {
+          year: '2009',
+          text: 'Our journey started with just two clients, laying the foundation through successful recruitment partnerships built on trust, quality, and long-term relationships rather than one-time placements.',
+        },
+        {
+          year: '2011',
+          text: 'Bucks n Bricks was formally established as a Talent Management Solutions firm, transforming early success into a structured business focused on helping organizations attract, hire, and retain exceptional talent.',
+        },
+        {
+          year: '2012',
+          text: 'We achieved a significant milestone by successfully placing two General Managers and one Director-level executive within the FMCG and Manufacturing sectors, strengthening our reputation in executive hiring.',
+        },
+      ],
     },
     {
       id: '2',
-      year: '2016',
-      title: 'Lasting Partnerships',
-      contentParagraphs: fullContent,
+      year: '2015',
+      title: 'Expansion & Regional Reach',
+      yearDetails: [
+        {
+          year: '2015',
+          text: 'Our client portfolio expanded to 8–10 active organizations, reflecting the confidence businesses placed in our consultative approach and our ability to identify high-impact talent.',
+        },
+        {
+          year: '2018',
+          text: 'Our recruitment capabilities extended across multiple sectors, including Information Technology, Automotive, Pharmaceuticals, Textiles, FMCG, and Manufacturing, allowing us to deliver specialized talent solutions across diverse industries.',
+        },
+        {
+          year: '2021',
+          text: 'We celebrated our first international placement, marking an important milestone in our journey toward becoming a globally connected talent partner.',
+        },
+        {
+          year: '2023',
+          text: 'Our presence expanded into the Kingdom of Saudi Arabia and the United Arab Emirates, including Dubai, enabling us to connect organizations with exceptional professionals across regional markets.',
+        },
+      ],
     },
     {
       id: '3',
       year: '2026',
-      title: 'Measurable Impact',
-      contentParagraphs: fullContent,
-    }
+      title: 'Global Growth & Strategic Impact',
+      yearDetails: [
+        {
+          year: '2026',
+          text: 'Today, Bucks n Bricks continues to strengthen its presence across Pakistan and international markets, partnering with leading organizations to deliver strategic talent solutions, executive search, HR consulting, and workforce development services that drive sustainable business growth.',
+        },
+      ],
+    },
   ];
+
+  const activeMilestoneData = milestones.find((m) => m.id === activeMilestone);
+  const activeIdx = milestones.findIndex((m) => m.id === activeMilestone);
 
   // Perfectly smooth, mathematically continuous cubic bezier spline path matching the image
   const svgPath = 'M 100 320 C 130 350, 160 380, 200 380 C 250 380, 320 260, 370 260 C 420 260, 470 310, 515 310 C 580 310, 660 120, 730 120 C 780 120, 850 120, 920 120';
@@ -94,13 +129,102 @@ export function JourneyTimeline() {
 
   return (
     <section id="journey" className="relative py-20 sm:py-28 bg-[#fcfbfa] overflow-hidden w-full">
-      {/* Invisible backdrop to dismiss milestone popup on outside click (mobile only) */}
-      {activeMilestone && (
-        <div
-          className="sm:hidden fixed inset-0 z-[9980] bg-slate-900/10 backdrop-blur-[1px]"
-          onClick={() => setActiveMilestone(null)}
-        />
-      )}
+      {/* Mobile Modal Overlay (Rendered at top-level outside transformed parent to ensure 100% sharp focus & scrollability) */}
+      <AnimatePresence>
+        {activeMilestoneData && (
+          <div className="sm:hidden fixed inset-0 z-[99998] flex items-center justify-center p-4">
+            {/* Background Backdrop Blur */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
+              onClick={() => setActiveMilestone(null)}
+            />
+
+            {/* Sharp, Clear, Unblurred Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 16 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              className="relative w-full max-w-sm bg-white border border-slate-200/90 shadow-2xl rounded-2xl p-4 sm:p-5 z-[99999] text-left max-h-[82vh] flex flex-col my-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-100 shrink-0">
+                <div className="flex items-center gap-2 pr-2">
+                  <span className="w-1.5 h-6 bg-[#0b1c24] rounded-full shrink-0" />
+                  <h3 className="font-display font-bold text-base sm:text-lg text-[#011c30] tracking-tight leading-snug">
+                    {activeMilestoneData.title}
+                  </h3>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <img src={logoImg} alt="Bucks & Bricks Logo" className="h-6 w-auto object-contain" />
+                  <button
+                    onClick={() => setActiveMilestone(null)}
+                    className="text-slate-400 hover:text-slate-700 p-1.5 rounded-full hover:bg-slate-100 transition-colors"
+                    aria-label="Close"
+                  >
+                    <X size={18} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Scrollable Container for Full Year Details */}
+              <div className="overflow-y-auto pr-1 space-y-3.5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed font-sans scrollbar-thin scrollbar-thumb-slate-300 touch-pan-y max-h-[52vh] flex-1">
+                {activeMilestoneData.yearDetails.map((detail, index) => (
+                  <div key={index} className="flex flex-col gap-1 border-l-2 border-blue-500/40 pl-3 py-1 bg-slate-50/60 rounded-r-lg">
+                    <span className="font-display font-bold text-xs sm:text-sm text-[#011c30] flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block" />
+                      {detail.year}
+                    </span>
+                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">{detail.text}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bottom Navigation Arrows */}
+              <div className="flex items-center justify-between pt-3 mt-3 border-t border-slate-100 shrink-0 select-none">
+                {activeIdx > 0 ? (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveMilestone(milestones[activeIdx - 1].id);
+                    }}
+                    className="flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer group"
+                    aria-label="Previous milestone card"
+                  >
+                    <ChevronLeft size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
+                    <span>{milestones[activeIdx - 1].year}</span>
+                  </button>
+                ) : (
+                  <div className="w-16" />
+                )}
+
+                <span className="text-[11px] font-semibold text-slate-400">
+                  {activeIdx + 1} / {milestones.length}
+                </span>
+
+                {activeIdx < milestones.length - 1 ? (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveMilestone(milestones[activeIdx + 1].id);
+                    }}
+                    className="flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer group"
+                    aria-label="Next milestone card"
+                  >
+                    <span>{milestones[activeIdx + 1].year}</span>
+                    <ChevronRight size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
+                  </button>
+                ) : (
+                  <div className="w-16" />
+                )}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       <div className="max-w-7xl mx-auto px-6 relative">
         
@@ -109,7 +233,6 @@ export function JourneyTimeline() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
-          style={{ willChange: 'transform, opacity' }}
           variants={containerVariants}
           className="relative w-full flex flex-col lg:block"
         >
@@ -123,22 +246,27 @@ export function JourneyTimeline() {
               Our Story
             </motion.span>
 
-            {/* Added "Our Journey" Main Heading Here */}
+            {/* Main Heading & Subheading */}
             <motion.h2
               variants={fadeInUp}
-              className="font-display font-extrabold text-3xl sm:text-4xl text-[#011c30] tracking-tight mb-4"
+              className="font-display font-extrabold text-3xl sm:text-4xl text-[#011c30] tracking-tight mb-2"
             >
               Our Journey
             </motion.h2>
+
+            <motion.h3
+              variants={fadeInUp}
+              className="font-display font-bold text-lg sm:text-xl text-blue-600 mb-3"
+            >
+              From Humble Beginnings to Trusted Talent Partners
+            </motion.h3>
 
             <motion.p
               variants={fadeInUp}
               className="text-slate-600 font-sans text-xs lg:text-sm leading-relaxed mb-8"
             >
-              Since 2011, Bucks & Bricks has been helping organizations build stronger teams through strategic recruitment, executive search, HR consulting, and learning & development solutions.
+              Every successful business starts with a vision. Ours began with a simple belief, that the right people have the power to transform organizations. What started as a small recruitment initiative has evolved into a trusted Talent Management Solutions partner serving businesses across Pakistan and international markets. Every milestone reflects our commitment to building lasting relationships, delivering exceptional talent, and creating meaningful business impact.
             </motion.p>
-
- 
           </div>
 
           {/* 2. Timeline Canvas Container */}
@@ -209,7 +337,7 @@ export function JourneyTimeline() {
               }}
               onMouseLeave={() => {
                 if (typeof window !== 'undefined' && window.innerWidth >= 640) {
-                  setActiveMilestone(null);
+                  if (activeMilestone === '1') setActiveMilestone(null);
                 }
               }}
             >
@@ -232,6 +360,7 @@ export function JourneyTimeline() {
                   }`} />
                 </motion.button>
 
+                {/* Desktop Inline Popover */}
                 <AnimatePresence>
                   {activeMilestone === '1' && (
                     <motion.div
@@ -239,18 +368,18 @@ export function JourneyTimeline() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -8, scale: 0.95 }}
                       transition={{ duration: 0.2, ease: 'easeOut' }}
-                      className="absolute left-[-20px] sm:left-1/2 transform translate-x-0 sm:-translate-x-1/2 z-[9999] bg-white border border-slate-200/90 shadow-2xl p-3.5 sm:p-5 rounded-2xl w-[280px] xs:w-[320px] sm:w-[400px] max-w-[calc(100vw-32px)] bottom-12 sm:bottom-16 text-left"
+                      className="hidden sm:block absolute left-1/2 transform -translate-x-1/2 z-[9999] bg-white border border-slate-200/90 shadow-2xl p-5 rounded-2xl w-[400px] bottom-16 text-left"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <div className="absolute left-7 sm:left-1/2 transform translate-x-0 sm:-translate-x-1/2 w-3 h-3 bg-white border-r border-b border-slate-200 rotate-45 -bottom-1.5" />
+                      <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white border-r border-b border-slate-200 rotate-45 -bottom-1.5" />
                       
                       <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-100">
                         <div className="flex items-center gap-2">
-                          <span className="w-1.5 h-5 sm:h-7 bg-[#0b1c24] rounded-full" />
-                          <h3 className="font-display font-bold text-base sm:text-xl text-[#011c30] tracking-tight">{milestones[0].title}</h3>
+                          <span className="w-1.5 h-7 bg-[#0b1c24] rounded-full" />
+                          <h3 className="font-display font-bold text-xl text-[#011c30] tracking-tight">{milestones[0].title}</h3>
                         </div>
                         <div className="flex items-center gap-2">
-                          <img src={logoImg} alt="Bucks & Bricks Logo" className="h-5 sm:h-7 w-auto object-contain" />
+                          <img src={logoImg} alt="Bucks & Bricks Logo" className="h-7 w-auto object-contain" />
                           <button 
                             onClick={(e) => { e.stopPropagation(); setActiveMilestone(null); }}
                             className="text-slate-400 hover:text-slate-700 p-1 rounded-full hover:bg-slate-100 transition-colors"
@@ -262,10 +391,55 @@ export function JourneyTimeline() {
                       </div>
 
                       {/* Scrollable Container for Full Content */}
-                      <div className="max-h-[220px] sm:max-h-[280px] overflow-y-auto pr-2 space-y-3 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed font-sans scrollbar-thin scrollbar-thumb-slate-300">
-                        {milestones[0].contentParagraphs.map((paragraph, index) => (
-                          <p key={index}>{paragraph}</p>
+                      <div className="max-h-[250px] overflow-y-auto pr-2 space-y-3.5 pt-1 text-sm text-slate-600 leading-relaxed font-sans scrollbar-thin scrollbar-thumb-slate-300">
+                        {milestones[0].yearDetails.map((detail, index) => (
+                          <div key={index} className="flex flex-col gap-1 border-l-2 border-blue-500/30 pl-3 py-0.5">
+                            <span className="font-display font-bold text-sm text-[#011c30] flex items-center gap-1.5">
+                              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block" />
+                              {detail.year}
+                            </span>
+                            <p className="text-slate-600 text-sm leading-relaxed">{detail.text}</p>
+                          </div>
                         ))}
+                      </div>
+
+                      {/* Desktop Bottom Navigation Footer */}
+                      <div className="flex items-center justify-between pt-3 mt-3 border-t border-slate-100 shrink-0 select-none">
+                        {activeIdx > 0 ? (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveMilestone(milestones[activeIdx - 1].id);
+                            }}
+                            className="flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer group"
+                            aria-label="Previous milestone card"
+                          >
+                            <ChevronLeft size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
+                            <span>{milestones[activeIdx - 1].year}</span>
+                          </button>
+                        ) : (
+                          <div className="w-16" />
+                        )}
+
+                        <span className="text-[11px] font-semibold text-slate-400">
+                          {activeIdx + 1} / {milestones.length}
+                        </span>
+
+                        {activeIdx < milestones.length - 1 ? (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveMilestone(milestones[activeIdx + 1].id);
+                            }}
+                            className="flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer group"
+                            aria-label="Next milestone card"
+                          >
+                            <span>{milestones[activeIdx + 1].year}</span>
+                            <ChevronRight size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
+                          </button>
+                        ) : (
+                          <div className="w-16" />
+                        )}
                       </div>
                     </motion.div>
                   )}
@@ -288,7 +462,7 @@ export function JourneyTimeline() {
               </motion.div>
             </div>
 
-            {/* 2. 2013 Milestone Node */}
+            {/* 2. 2015 Milestone Node */}
             <div
               style={{ left: '51.5%', top: '59.62%' }}
               className={`absolute flex flex-col items-start -ml-[22px] -mt-[22px] pointer-events-auto transition-all ${
@@ -301,7 +475,7 @@ export function JourneyTimeline() {
               }}
               onMouseLeave={() => {
                 if (typeof window !== 'undefined' && window.innerWidth >= 640) {
-                  setActiveMilestone(null);
+                  if (activeMilestone === '2') setActiveMilestone(null);
                 }
               }}
             >
@@ -324,6 +498,7 @@ export function JourneyTimeline() {
                   }`} />
                 </motion.button>
 
+                {/* Desktop Inline Popover */}
                 <AnimatePresence>
                   {activeMilestone === '2' && (
                     <motion.div
@@ -331,18 +506,18 @@ export function JourneyTimeline() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -8, scale: 0.95 }}
                       transition={{ duration: 0.2, ease: 'easeOut' }}
-                      className="absolute left-1/2 transform -translate-x-1/2 z-[9999] bg-white border border-slate-200/90 shadow-2xl p-3.5 sm:p-5 rounded-2xl w-[280px] xs:w-[320px] sm:w-[400px] max-w-[calc(100vw-32px)] bottom-12 sm:bottom-16 text-left"
+                      className="hidden sm:block absolute left-1/2 transform -translate-x-1/2 z-[9999] bg-white border border-slate-200/90 shadow-2xl p-5 rounded-2xl w-[400px] bottom-16 text-left"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white border-r border-b border-slate-200 rotate-45 -bottom-1.5" />
                       
                       <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-100">
                         <div className="flex items-center gap-2">
-                          <span className="w-1.5 h-5 sm:h-7 bg-[#0b1c24] rounded-full" />
-                          <h3 className="font-display font-bold text-base sm:text-xl text-[#011c30] tracking-tight">{milestones[1].title}</h3>
+                          <span className="w-1.5 h-7 bg-[#0b1c24] rounded-full" />
+                          <h3 className="font-display font-bold text-xl text-[#011c30] tracking-tight">{milestones[1].title}</h3>
                         </div>
                         <div className="flex items-center gap-2">
-                          <img src={logoImg} alt="Bucks & Bricks Logo" className="h-5 sm:h-7 w-auto object-contain" />
+                          <img src={logoImg} alt="Bucks & Bricks Logo" className="h-7 w-auto object-contain" />
                           <button 
                             onClick={(e) => { e.stopPropagation(); setActiveMilestone(null); }}
                             className="text-slate-400 hover:text-slate-700 p-1 rounded-full hover:bg-slate-100 transition-colors"
@@ -354,10 +529,55 @@ export function JourneyTimeline() {
                       </div>
 
                       {/* Scrollable Container for Full Content */}
-                      <div className="max-h-[220px] sm:max-h-[280px] overflow-y-auto pr-2 space-y-3 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed font-sans scrollbar-thin scrollbar-thumb-slate-300">
-                        {milestones[1].contentParagraphs.map((paragraph, index) => (
-                          <p key={index}>{paragraph}</p>
+                      <div className="max-h-[250px] overflow-y-auto pr-2 space-y-3.5 pt-1 text-sm text-slate-600 leading-relaxed font-sans scrollbar-thin scrollbar-thumb-slate-300">
+                        {milestones[1].yearDetails.map((detail, index) => (
+                          <div key={index} className="flex flex-col gap-1 border-l-2 border-blue-500/30 pl-3 py-0.5">
+                            <span className="font-display font-bold text-sm text-[#011c30] flex items-center gap-1.5">
+                              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block" />
+                              {detail.year}
+                            </span>
+                            <p className="text-slate-600 text-sm leading-relaxed">{detail.text}</p>
+                          </div>
                         ))}
+                      </div>
+
+                      {/* Desktop Bottom Navigation Footer */}
+                      <div className="flex items-center justify-between pt-3 mt-3 border-t border-slate-100 shrink-0 select-none">
+                        {activeIdx > 0 ? (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveMilestone(milestones[activeIdx - 1].id);
+                            }}
+                            className="flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer group"
+                            aria-label="Previous milestone card"
+                          >
+                            <ChevronLeft size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
+                            <span>{milestones[activeIdx - 1].year}</span>
+                          </button>
+                        ) : (
+                          <div className="w-16" />
+                        )}
+
+                        <span className="text-[11px] font-semibold text-slate-400">
+                          {activeIdx + 1} / {milestones.length}
+                        </span>
+
+                        {activeIdx < milestones.length - 1 ? (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveMilestone(milestones[activeIdx + 1].id);
+                            }}
+                            className="flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer group"
+                            aria-label="Next milestone card"
+                          >
+                            <span>{milestones[activeIdx + 1].year}</span>
+                            <ChevronRight size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
+                          </button>
+                        ) : (
+                          <div className="w-16" />
+                        )}
                       </div>
                     </motion.div>
                   )}
@@ -380,7 +600,7 @@ export function JourneyTimeline() {
               </motion.div>
             </div>
 
-            {/* 3. 2025 Milestone Node */}
+            {/* 3. 2026 Milestone Node */}
             <div
               style={{ left: '73%', top: '23.08%' }}
               className={`absolute flex flex-col items-start -ml-[22px] -mt-[22px] pointer-events-auto transition-all ${
@@ -393,7 +613,7 @@ export function JourneyTimeline() {
               }}
               onMouseLeave={() => {
                 if (typeof window !== 'undefined' && window.innerWidth >= 640) {
-                  setActiveMilestone(null);
+                  if (activeMilestone === '3') setActiveMilestone(null);
                 }
               }}
             >
@@ -416,6 +636,7 @@ export function JourneyTimeline() {
                   }`} />
                 </motion.button>
 
+                {/* Desktop Inline Popover */}
                 <AnimatePresence>
                   {activeMilestone === '3' && (
                     <motion.div
@@ -423,18 +644,18 @@ export function JourneyTimeline() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.95 }}
                       transition={{ duration: 0.2, ease: 'easeOut' }}
-                      className="absolute right-[-28px] sm:right-auto sm:left-1/2 transform translate-x-0 sm:-translate-x-1/2 z-[9999] bg-white border border-slate-200/90 shadow-2xl p-3.5 sm:p-5 rounded-2xl w-[280px] xs:w-[320px] sm:w-[400px] max-w-[calc(100vw-32px)] top-12 sm:top-16 text-left"
+                      className="hidden sm:block absolute left-1/2 transform -translate-x-1/2 z-[9999] bg-white border border-slate-200/90 shadow-2xl p-5 rounded-2xl w-[400px] top-16 text-left"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <div className="absolute right-8 sm:right-auto sm:left-1/2 transform translate-x-0 sm:-translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-200 rotate-45 -top-1.5" />
+                      <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-200 rotate-45 -top-1.5" />
                       
                       <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-slate-100">
                         <div className="flex items-center gap-2">
-                          <span className="w-1.5 h-5 sm:h-7 bg-[#0b1c24] rounded-full" />
-                          <h3 className="font-display font-bold text-base sm:text-xl text-[#011c30] tracking-tight">{milestones[2].title}</h3>
+                          <span className="w-1.5 h-7 bg-[#0b1c24] rounded-full" />
+                          <h3 className="font-display font-bold text-xl text-[#011c30] tracking-tight">{milestones[2].title}</h3>
                         </div>
                         <div className="flex items-center gap-2">
-                          <img src={logoImg} alt="Bucks & Bricks Logo" className="h-5 sm:h-7 w-auto object-contain" />
+                          <img src={logoImg} alt="Bucks & Bricks Logo" className="h-7 w-auto object-contain" />
                           <button 
                             onClick={(e) => { e.stopPropagation(); setActiveMilestone(null); }}
                             className="text-slate-400 hover:text-slate-700 p-1 rounded-full hover:bg-slate-100 transition-colors"
@@ -446,10 +667,55 @@ export function JourneyTimeline() {
                       </div>
 
                       {/* Scrollable Container for Full Content */}
-                      <div className="max-h-[220px] sm:max-h-[280px] overflow-y-auto pr-2 space-y-3 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed font-sans scrollbar-thin scrollbar-thumb-slate-300">
-                        {milestones[2].contentParagraphs.map((paragraph, index) => (
-                          <p key={index}>{paragraph}</p>
+                      <div className="max-h-[250px] overflow-y-auto pr-2 space-y-3.5 pt-1 text-sm text-slate-600 leading-relaxed font-sans scrollbar-thin scrollbar-thumb-slate-300">
+                        {milestones[2].yearDetails.map((detail, index) => (
+                          <div key={index} className="flex flex-col gap-1 border-l-2 border-blue-500/30 pl-3 py-0.5">
+                            <span className="font-display font-bold text-sm text-[#011c30] flex items-center gap-1.5">
+                              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block" />
+                              {detail.year}
+                            </span>
+                            <p className="text-slate-600 text-sm leading-relaxed">{detail.text}</p>
+                          </div>
                         ))}
+                      </div>
+
+                      {/* Desktop Bottom Navigation Footer */}
+                      <div className="flex items-center justify-between pt-3 mt-3 border-t border-slate-100 shrink-0 select-none">
+                        {activeIdx > 0 ? (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveMilestone(milestones[activeIdx - 1].id);
+                            }}
+                            className="flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer group"
+                            aria-label="Previous milestone card"
+                          >
+                            <ChevronLeft size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
+                            <span>{milestones[activeIdx - 1].year}</span>
+                          </button>
+                        ) : (
+                          <div className="w-16" />
+                        )}
+
+                        <span className="text-[11px] font-semibold text-slate-400">
+                          {activeIdx + 1} / {milestones.length}
+                        </span>
+
+                        {activeIdx < milestones.length - 1 ? (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveMilestone(milestones[activeIdx + 1].id);
+                            }}
+                            className="flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer group"
+                            aria-label="Next milestone card"
+                          >
+                            <span>{milestones[activeIdx + 1].year}</span>
+                            <ChevronRight size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
+                          </button>
+                        ) : (
+                          <div className="w-16" />
+                        )}
                       </div>
                     </motion.div>
                   )}

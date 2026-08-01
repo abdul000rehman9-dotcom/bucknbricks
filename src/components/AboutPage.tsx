@@ -29,20 +29,36 @@ export function AboutPage() {
   return (
     <div id="about" className="pt-24 pb-12 bg-[#fcfbfa]">
       {/* 1. Hero Section of the About Us Page */}
-      <section id="about-hero" className="max-w-7xl mx-auto px-6 py-12 md:py-20 text-center relative overflow-hidden">
+      <section id="about-hero" className="max-w-7xl mx-auto px-6 py-12 md:py-16 text-center relative overflow-hidden">
         {/* Subtle grid pattern background */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808005_1px,transparent_1px),linear-gradient(to_bottom,#80808005_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none" />
         
         <div className="relative z-10">
           {/* Centered Heading */}
           <AnimatedHeading
-            text="Building Teams. Creating Futures."
-            className="text-4xl sm:text-5xl md:text-6xl font-bold font-display text-[#011c30] tracking-tight leading-[1.1] mb-12 max-w-4xl mx-auto text-center"
+            text="ABOUT US"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold font-display text-[#011c30] tracking-tight leading-[1.1] mb-8 max-w-4xl mx-auto text-center"
             as="h1"
           />
 
+          {/* About Us Introductory Paragraphs */}
+          <div className="max-w-4xl mx-auto text-left sm:text-center space-y-4 mb-12 text-slate-600 font-sans text-sm sm:text-base leading-relaxed">
+            <p>
+              At Bucks n Bricks, we believe that every successful organization is built by exceptional people. Since our inception, we have partnered with businesses to solve their most critical talent challenges by connecting them with professionals who create lasting value.
+            </p>
+            <p>
+              As a trusted Talent Management Solutions firm, we specialize in Executive Search, Recruitment Solutions, HR Consulting, and Learning & Development, helping organizations build high-performing teams while enabling professionals to advance meaningful careers.
+            </p>
+            <p>
+              Our approach extends beyond recruitment. We work closely with every client to understand their business strategy, organizational culture, and long-term objectives, allowing us to deliver talent solutions that create measurable impact.
+            </p>
+            <p>
+              From leadership hiring and workforce planning to organizational development, we remain committed to building partnerships founded on trust, integrity, and excellence.
+            </p>
+          </div>
+
           {/* Centered Image with left-to-right banner opening animation */}
-          <div className="relative w-full max-w-5xl aspect-[16/9] md:aspect-[21/9] mx-auto rounded-3xl overflow-hidden shadow-2xl bg-slate-100 mb-16">
+          <div className="relative w-full max-w-5xl aspect-[16/9] md:aspect-[21/9] mx-auto rounded-3xl overflow-hidden shadow-2xl bg-slate-100 mb-8">
             {/* Banner slide overlay (opening left-to-right) */}
             <motion.div
               initial={{ scaleX: 1 }}
@@ -57,26 +73,26 @@ export function AboutPage() {
               animate={{ scale: 1 }}
               transition={{ duration: 1.6, ease: 'easeOut', delay: 0.1 }}
               src={heroBannerImg}
-              alt="Building Teams. Creating Futures."
-              className="w-full h-full object-fit "
+              alt="About Bucks n Bricks"
+              className="w-full h-full object-fit"
             />
           </div>
         </div>
       </section>
 
-      {/* 2. About Us Split Section */}
+      {/* 2. Strategic Solutions Section */}
       <section id="about-details" className="relative py-16 sm:py-24 bg-white overflow-hidden border-t border-b border-slate-50">
         <div className="max-w-7xl mx-auto px-6">
           {/* Centered Section Title */}
           <div className="mb-16 text-center">
             <AnimatedHeading
-              text="About Bucks & Bricks"
+              text="Strategic Solutions"
               className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-[#011c30] tracking-tight text-center"
             />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
-            {/* Left Column: Image of professional working at a laptop with a red/warm mug */}
+            {/* Left Column: Image */}
             <div className="lg:col-span-6">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, x: -30 }}
@@ -87,47 +103,27 @@ export function AboutPage() {
               >
                 <img
                   src={officeCollaboration}
-                  alt="Professional Specialist Working"
-                  className="w-full h-full object-fit "
+                  alt="Strategic Solutions"
+                  className="w-full h-full object-fit"
                 />
               </motion.div>
             </div>
 
-            {/* Right Column: Key pillars of About Us */}
+            {/* Right Column: Strategic Solutions Paragraphs */}
             <div className="lg:col-span-6 flex flex-col items-start text-left">
               <StaggerContainer className="flex flex-col gap-6 w-full">
-                {/* Pillar 1: Strategic Solutions */}
                 <StaggerItem direction="up" className="w-full">
                   <div className="border-b border-slate-100 pb-6">
-                    <h3 className="text-[#011c30] font-bold font-display text-xl mb-2">
-                      Strategic Solutions
-                    </h3>
-                    <p className="text-slate-600 font-sans text-xs sm:text-sm sm:leading-relaxed">
-                      For over a decade, Bucks & Bricks has been helping organizations solve their talent challenges through strategic recruitment, executive search, HR consulting, and workforce development solutions.
+                    <p className="text-slate-600 font-sans text-sm sm:text-base leading-relaxed">
+                      For over a decade, Bucks n Bricks has partnered with organizations across Pakistan and international markets to solve complex hiring challenges and strengthen their workforce. We combine industry expertise, strategic insight, and an extensive talent network to deliver recruitment solutions that align with business objectives.
                     </p>
                   </div>
                 </StaggerItem>
 
-                {/* Pillar 2: Talent Connection */}
-                <StaggerItem direction="up" className="w-full">
-                  <div className="border-b border-slate-100 pb-6">
-                    <h3 className="text-[#011c30] font-bold font-display text-xl mb-2">
-                      Our Goal
-                    </h3>
-                    <p className="text-slate-600 font-sans text-xs sm:text-sm sm:leading-relaxed">
-                      Our mission is simple: connect businesses with exceptional people and help professionals build rewarding careers.
-                    </p>
-                  </div>
-                </StaggerItem>
-
-                {/* Pillar 3: True Business Partnership */}
                 <StaggerItem direction="up" className="w-full">
                   <div className="pb-2">
-                    <h3 className="text-[#011c30] font-bold font-display text-xl mb-2">
-                      True Business Partnership
-                    </h3>
-                    <p className="text-slate-600 font-sans text-xs sm:text-sm sm:leading-relaxed">
-                      We work as a true business partner, understanding our clients' goals and delivering customized solutions that create measurable impact.
+                    <p className="text-slate-600 font-sans text-sm sm:text-base leading-relaxed">
+                      Whether supporting executive leadership hiring or large-scale recruitment initiatives, our focus remains the same, finding the right people who create lasting business impact.
                     </p>
                   </div>
                 </StaggerItem>
@@ -137,7 +133,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* 3. Driven by Passion, Focused on Excellence Section */}
+      {/* 3. Our Mission & Our Vision Section */}
       <section id="about-pillars" className="relative py-16 sm:py-24 bg-[#fcfbfa] overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           {/* Centered Heading */}
@@ -167,7 +163,7 @@ export function AboutPage() {
                 Our Mission
               </h3>
               <p className="text-slate-300 font-sans text-xs sm:text-sm leading-relaxed">
-                To empower organizations with exceptional talent and innovative HR solutions while helping professionals build meaningful and rewarding careers.
+                To empower organizations by connecting them with exceptional talent while enabling professionals to build rewarding careers through innovative, ethical, and strategic talent management solutions.
               </p>
             </motion.div>
 
@@ -182,7 +178,7 @@ export function AboutPage() {
             >
               <img
                 src={digitalWorkplace}
-                alt="Keyboard Typing Hands"
+                alt="Our Mission & Vision"
                 className="w-full h-full object-fit transition-transform duration-500 group-hover:scale-105"
               />
             </motion.div>
@@ -204,7 +200,7 @@ export function AboutPage() {
                 Our Vision
               </h3>
               <p className="text-slate-300 font-sans text-xs sm:text-sm leading-relaxed">
-                To become Pakistan's most trusted talent management and HR consulting partner, recognized for transforming workplaces through people, innovation, and long-term partnerships.
+                To become the region's most trusted talent management partner, recognized for transforming businesses through people, innovation, and long-term strategic partnerships
               </p>
             </motion.div>
           </div>

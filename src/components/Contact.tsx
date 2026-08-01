@@ -60,9 +60,21 @@ export function Contact() {
             className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-[#011c30] tracking-tight leading-none mb-4"
           />
 
-          <AnimatedParagraph className="text-slate-500 font-sans text-sm sm:text-base leading-relaxed mb-8 max-w-lg">
-            Looking for Exceptional Talent? Partner with Bucks & Bricks to build high-performing teams that drive business success.
-          </AnimatedParagraph>
+          <h3
+            className="text-xl sm:text-2xl font-bold font-display mb-3"
+            style={{ color: '#89C7F5' }}
+          >
+            Let's Build Exceptional Teams Together
+          </h3>
+
+          <div className="text-slate-500 font-sans text-sm sm:text-base leading-relaxed mb-8 max-w-lg space-y-3">
+            <p>
+              Whether you're looking to hire top talent, strengthen your workforce strategy, or explore your next career opportunity, we're here to help.
+            </p>
+            <p>
+              Partner with Bucks n Bricks to access strategic recruitment, executive search, HR consulting, and talent development solutions designed to support your long-term success.
+            </p>
+          </div>
 
           {/* Form container - Slides upward */}
           <motion.div
