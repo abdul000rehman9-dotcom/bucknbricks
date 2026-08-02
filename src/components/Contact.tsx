@@ -226,7 +226,7 @@ export function Contact() {
             <img
               src={professionalHandshake}
               alt="Professional Handshake Greeting"
-              className="w-full h-full object-fit brightness-95"
+              className="w-full h-full object-cover brightness-95"
             />
           </motion.div>
         </div>
