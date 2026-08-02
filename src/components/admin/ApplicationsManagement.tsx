@@ -626,23 +626,9 @@ export function ApplicationsManagement() {
                     <span className="font-semibold text-slate-800">{selectedApplication.personalInformation?.country}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Current City</span>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block">City</span>
                     <span className="font-semibold text-slate-800">{selectedApplication.personalInformation?.currentCity || 'N/A'}</span>
                   </div>
-                  <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Experience</span>
-                    <span className="font-semibold text-slate-800">{selectedApplication.personalInformation?.yearsOfExperience}</span>
-                  </div>
-                  <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Primary Language</span>
-                    <span className="font-semibold text-slate-800">{selectedApplication.personalInformation?.primaryLanguage}</span>
-                  </div>
-                  {selectedApplication.personalInformation?.additionalLanguage && (
-                    <div>
-                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Additional Language</span>
-                      <span className="font-semibold text-slate-800">{selectedApplication.personalInformation?.additionalLanguage}</span>
-                    </div>
-                  )}
                   <div>
                     <span className="text-[10px] uppercase font-bold text-slate-400 block">Submitted On</span>
                     <span className="font-semibold text-slate-800">
@@ -652,6 +638,52 @@ export function ApplicationsManagement() {
                         day: 'numeric',
                       })}
                     </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Employment Information Grid */}
+              <div>
+                <h3 className="text-xs font-bold text-[#052842] uppercase tracking-wider mb-3 border-b border-slate-100 pb-1">
+                  Employment Information
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Employment Status</span>
+                    <span className="font-semibold text-slate-800">{selectedApplication.personalInformation?.employmentStatus || 'N/A'}</span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Current Job Title</span>
+                    <span className="font-semibold text-slate-800">{selectedApplication.personalInformation?.currentJobTitle || 'N/A'}</span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Total Experience</span>
+                    <span className="font-semibold text-slate-800">{selectedApplication.personalInformation?.yearsOfExperience || 'N/A'}</span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Current Salary</span>
+                    <span className="font-semibold text-slate-800">{selectedApplication.personalInformation?.currentSalary || 'N/A'}</span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Expected Salary</span>
+                    <span className="font-semibold text-slate-800">{selectedApplication.personalInformation?.expectedSalary || 'N/A'}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Academic Information Grid */}
+              <div>
+                <h3 className="text-xs font-bold text-[#052842] uppercase tracking-wider mb-3 border-b border-slate-100 pb-1">
+                  Academic Information
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Academic Qualification</span>
+                    <span className="font-semibold text-slate-800">{selectedApplication.personalInformation?.academicQualification || 'N/A'}</span>
+                  </div>
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 block">University / Institute</span>
+                    <span className="font-semibold text-slate-800">{selectedApplication.personalInformation?.university || 'N/A'}</span>
                   </div>
                 </div>
               </div>

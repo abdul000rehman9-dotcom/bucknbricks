@@ -132,10 +132,22 @@ const getFallbackChatResponse = (userMessage, jobs, websiteKnowledge) => {
 };
 
 /**
- * Generate Chatbot response using Gemini API
+ * Generate Chatbot response using Gemini API or fallback knowledge engine
  */
 export const generateChatReplyWithGemini = async (userMessage, history = [], jobs = [], websiteKnowledge = {}) => {
-  const ai = getGenAIClient();
+  const apiKey = process.env.GEMINI_API_KEY;
+  if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY' || apiKey.startsWith('YOUR_')) {
+    logger.info('Gemini API key not configured — using website knowledge base fallback engine');
+    return getFallbackChatResponse(userMessage, jobs, websiteKnowledge);
+  }
+
+  let ai;
+  try {
+    ai = getGenAIClient();
+  } catch (err) {
+    logger.warn(`Gemini client init notice: ${err.message}. Using fallback engine.`);
+    return getFallbackChatResponse(userMessage, jobs, websiteKnowledge);
+  }
 
   const systemInstruction = `You are the official AI Recruitment & Website Assistant for "Bucks & Bricks Co.", a premier global recruitment, executive search, HR consulting, and tech talent acquisition firm.
 Your ONLY responsibility is to assist website visitors by answering questions related strictly to Bucks & Bricks Co., our published job vacancies, recruitment services, leadership team, trusted industries, application workflow, and free AI Resume Checker tool based on the provided website knowledge base.
@@ -206,7 +218,7 @@ CRITICAL OPERATIONAL & SECURITY MANDATES:
     }
     return replyText;
   } catch (error) {
-    logger.error(`❌ [GEMINI ERROR] Chatbot request failed: ${error.message}`);
-    throw new Error(`Chatbot AI service failed to generate response: ${error.message}`);
+    logger.warn(`❌ [GEMINI WARNING] Chatbot request failed: ${error.message}. Switching to fallback engine.`);
+    return getFallbackChatResponse(userMessage, jobs, websiteKnowledge);
   }
 };

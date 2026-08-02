@@ -79,7 +79,13 @@ export interface ApplicationDetail {
     phoneNumber: string;
     country: string;
     currentCity?: string;
+    employmentStatus?: string;
+    currentJobTitle?: string;
     yearsOfExperience: string;
+    currentSalary?: string;
+    expectedSalary?: string;
+    academicQualification?: string;
+    university?: string;
     primaryLanguage: string;
     additionalLanguage?: string;
   };

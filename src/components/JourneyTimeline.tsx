@@ -254,13 +254,6 @@ export function JourneyTimeline() {
               Our Journey
             </motion.h2>
 
-            <motion.h3
-              variants={fadeInUp}
-              className="font-display font-bold text-lg sm:text-xl text-blue-600 mb-3"
-            >
-              From Humble Beginnings to Trusted Talent Partners
-            </motion.h3>
-
             <motion.p
               variants={fadeInUp}
               className="text-slate-600 font-sans text-xs lg:text-sm leading-relaxed mb-8"

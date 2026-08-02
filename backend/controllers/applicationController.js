@@ -34,6 +34,12 @@ export const applyForJob = asyncHandler(async (req, res) => {
     yearsOfExperience,
     primaryLanguage,
     additionalLanguage,
+    employmentStatus,
+    currentJobTitle,
+    currentSalary,
+    expectedSalary,
+    academicQualification,
+    university,
   } = req.body;
 
   if (!firstName || !firstName.trim()) throw ApiError.badRequest('First name is required.');
@@ -92,8 +98,14 @@ export const applyForJob = asyncHandler(async (req, res) => {
       phoneNumber: phoneNumber.trim(),
       country: country.trim(),
       currentCity: currentCity ? currentCity.trim() : '',
+      employmentStatus: employmentStatus ? employmentStatus.trim() : '',
+      currentJobTitle: currentJobTitle ? currentJobTitle.trim() : '',
       yearsOfExperience: String(yearsOfExperience).trim(),
-      primaryLanguage: primaryLanguage.trim(),
+      currentSalary: currentSalary ? currentSalary.trim() : '',
+      expectedSalary: expectedSalary ? expectedSalary.trim() : '',
+      academicQualification: academicQualification ? academicQualification.trim() : '',
+      university: university ? university.trim() : '',
+      primaryLanguage: primaryLanguage ? primaryLanguage.trim() : '',
       additionalLanguage: additionalLanguage ? additionalLanguage.trim() : '',
       jobId: job._id,
       jobTitle: job.jobTitle,
@@ -256,26 +268,64 @@ export const getAllApplications = asyncHandler(async (req, res) => {
  * ADMIN: GET SINGLE APPLICATION DETAILS
  */
 export const getApplicationById = asyncHandler(async (req, res) => {
-  if (isOffline() || String(req.params.id).startsWith('offline-')) {
-    const app = getOfflineApplicationById(req.params.id);
-    if (!app) throw ApiError.notFound('Application record not found.');
-    return res.status(200).json(ApiResponse.success({ application: { id: app.id || app._id, personalInformation: { firstName: app.firstName || 'Candidate', lastName: app.lastName || '', candidateName: app.applicantName || 'Candidate', email: app.email, phoneNumber: app.phone || '+92 300 0000000', country: 'Pakistan', currentCity: 'Karachi', yearsOfExperience: '5', primaryLanguage: 'English', additionalLanguage: 'Urdu' }, resumeInformation: { fileUrl: app.resumeUrl || '/uploads/sample_resume.pdf', fileName: app.resumeFileName || 'resume.pdf', fileSize: 150000, mimeType: 'application/pdf' }, atsScore: app.atsScore || 85, appliedJob: { jobId: app.job?._id || null, jobTitle: app.job?.jobTitle || 'General Position', companyName: app.job?.companyName || 'Bucks & Bricks Co.', jobDetails: app.job || null }, status: app.status, createdAt: app.appliedAt || new Date(), updatedAt: app.appliedAt || new Date() } }, 'Application details retrieved successfully.'));
-  }
+    const formatAppDetails = (a) => ({
+      id: a.id || a._id,
+      personalInformation: {
+        firstName: a.firstName || 'Candidate',
+        lastName: a.lastName || '',
+        candidateName: a.candidateName || a.applicantName || `${a.firstName || ''} ${a.lastName || ''}`.trim() || 'Candidate',
+        email: a.email,
+        phoneNumber: a.phoneNumber || a.phone || '+92 300 0000000',
+        country: a.country || 'Pakistan',
+        currentCity: a.currentCity || '',
+        yearsOfExperience: a.yearsOfExperience || '',
+        primaryLanguage: a.primaryLanguage || 'English',
+        additionalLanguage: a.additionalLanguage || '',
+        employmentStatus: a.employmentStatus || '',
+        currentJobTitle: a.currentJobTitle || '',
+        currentSalary: a.currentSalary || '',
+        expectedSalary: a.expectedSalary || '',
+        academicQualification: a.academicQualification || '',
+        university: a.university || '',
+      },
+      resumeInformation: {
+        fileUrl: a.resumeFile || a.resumeUrl || '/uploads/sample_resume.pdf',
+        fileName: a.resumeFileName || 'resume.pdf',
+        fileSize: a.resumeFileSize || 150000,
+        mimeType: a.resumeMimeType || 'application/pdf',
+      },
+      atsScore: a.atsScore || 85,
+      appliedJob: {
+        jobId: a.jobId ? (a.jobId._id || a.jobId) : (a.job?._id || null),
+        jobTitle: a.jobTitle || a.job?.jobTitle || 'General Position',
+        companyName: a.companyName || a.job?.companyName || 'Bucks & Bricks Co.',
+        jobDetails: a.jobId || a.job || null,
+      },
+      status: a.status,
+      createdAt: a.createdAt || a.appliedAt || new Date(),
+      updatedAt: a.updatedAt || a.appliedAt || new Date(),
+    });
 
-  try {
-    const application = await Application.findById(req.params.id).populate('jobId');
-    if (!application) {
+    if (isOffline() || String(req.params.id).startsWith('offline-')) {
       const app = getOfflineApplicationById(req.params.id);
-      if (app) return res.status(200).json(ApiResponse.success({ application: { id: app.id || app._id, personalInformation: { firstName: app.firstName || 'Candidate', lastName: app.lastName || '', candidateName: app.applicantName || 'Candidate', email: app.email, phoneNumber: app.phone || '+92 300 0000000', country: 'Pakistan', currentCity: 'Karachi', yearsOfExperience: '5', primaryLanguage: 'English', additionalLanguage: 'Urdu' }, resumeInformation: { fileUrl: app.resumeUrl || '/uploads/sample_resume.pdf', fileName: app.resumeFileName || 'resume.pdf', fileSize: 150000, mimeType: 'application/pdf' }, atsScore: app.atsScore || 85, appliedJob: { jobId: app.job?._id || null, jobTitle: app.job?.jobTitle || 'General Position', companyName: app.job?.companyName || 'Bucks & Bricks Co.', jobDetails: app.job || null }, status: app.status, createdAt: app.appliedAt || new Date(), updatedAt: app.appliedAt || new Date() } }, 'Application details retrieved successfully.'));
-      throw ApiError.notFound('Application record not found.');
+      if (!app) throw ApiError.notFound('Application record not found.');
+      return res.status(200).json(ApiResponse.success({ application: formatAppDetails(app) }, 'Application details retrieved successfully.'));
     }
-    return res.status(200).json(ApiResponse.success({ application: { id: application.id, personalInformation: { firstName: application.firstName, lastName: application.lastName, candidateName: `${application.firstName} ${application.lastName}`, email: application.email, phoneNumber: application.phoneNumber, country: application.country, currentCity: application.currentCity, yearsOfExperience: application.yearsOfExperience, primaryLanguage: application.primaryLanguage, additionalLanguage: application.additionalLanguage }, resumeInformation: { fileUrl: application.resumeFile, fileName: application.resumeFileName, fileSize: application.resumeFileSize, mimeType: application.resumeMimeType }, atsScore: application.atsScore, appliedJob: { jobId: application.jobId ? application.jobId._id : null, jobTitle: application.jobTitle, companyName: application.companyName, jobDetails: application.jobId || null }, status: application.status, createdAt: application.createdAt, updatedAt: application.updatedAt } }, 'Application details retrieved successfully.'));
-  } catch (err) {
-    if (err instanceof ApiError) throw err;
-    const app = getOfflineApplicationById(req.params.id);
-    if (!app) throw ApiError.notFound('Application record not found.');
-    return res.status(200).json(ApiResponse.success({ application: { id: app.id || app._id, personalInformation: { firstName: app.firstName || 'Candidate', lastName: app.lastName || '', candidateName: app.applicantName || 'Candidate', email: app.email, phoneNumber: app.phone || '+92 300 0000000', country: 'Pakistan', currentCity: 'Karachi', yearsOfExperience: '5', primaryLanguage: 'English', additionalLanguage: 'Urdu' }, resumeInformation: { fileUrl: app.resumeUrl || '/uploads/sample_resume.pdf', fileName: app.resumeFileName || 'resume.pdf', fileSize: 150000, mimeType: 'application/pdf' }, atsScore: app.atsScore || 85, appliedJob: { jobId: app.job?._id || null, jobTitle: app.job?.jobTitle || 'General Position', companyName: app.job?.companyName || 'Bucks & Bricks Co.', jobDetails: app.job || null }, status: app.status, createdAt: app.appliedAt || new Date(), updatedAt: app.appliedAt || new Date() } }, 'Application details retrieved successfully.'));
-  }
+
+    try {
+      const application = await Application.findById(req.params.id).populate('jobId');
+      if (!application) {
+        const app = getOfflineApplicationById(req.params.id);
+        if (app) return res.status(200).json(ApiResponse.success({ application: formatAppDetails(app) }, 'Application details retrieved successfully.'));
+        throw ApiError.notFound('Application record not found.');
+      }
+      return res.status(200).json(ApiResponse.success({ application: formatAppDetails(application) }, 'Application details retrieved successfully.'));
+    } catch (err) {
+      if (err instanceof ApiError) throw err;
+      const app = getOfflineApplicationById(req.params.id);
+      if (!app) throw ApiError.notFound('Application record not found.');
+      return res.status(200).json(ApiResponse.success({ application: formatAppDetails(app) }, 'Application details retrieved successfully.'));
+    }
 });
 
 /**

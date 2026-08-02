@@ -41,6 +41,36 @@ const applicationSchema = new mongoose.Schema(
       trim: true,
       default: '',
     },
+    employmentStatus: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    currentJobTitle: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    currentSalary: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    expectedSalary: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    academicQualification: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    university: {
+      type: String,
+      trim: true,
+      default: '',
+    },
     yearsOfExperience: {
       type: String,
       required: [true, 'Years of experience is required'],

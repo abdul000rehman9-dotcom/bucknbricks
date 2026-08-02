@@ -263,13 +263,20 @@ export function JobDetailPage({ jobId = '1', onBack }: JobDetailPageProps) {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [country, setCountry] = useState('Pakistan');
-  const [primaryLang, setPrimaryLang] = useState('English');
-  const [additionalLangs, setAdditionalLangs] = useState('Urdu');
-  const [prevExp, setPrevExp] = useState<string[]>(['HR / Recruitment']);
-  const [expLevel, setExpLevel] = useState<'Beginner' | 'Intermediate' | 'Expert'>('Intermediate');
-  const [pastExpText, setPastExpText] = useState('');
-  const [hoursPerWeek, setHoursPerWeek] = useState(20);
-  const [startImmediately, setStartImmediately] = useState(true);
+  const [city, setCity] = useState('');
+
+  // Employment Information
+  const [employmentStatus, setEmploymentStatus] = useState<'Employed' | 'Unemployed' | 'Notice Period' | 'Other'>('Employed');
+  const [otherEmploymentStatus, setOtherEmploymentStatus] = useState('');
+  const [currentJobTitle, setCurrentJobTitle] = useState('');
+  const [totalYearsExperience, setTotalYearsExperience] = useState('');
+  const [currentSalary, setCurrentSalary] = useState('');
+  const [expectedSalary, setExpectedSalary] = useState('');
+
+  // Academic Information
+  const [qualification, setQualification] = useState('');
+  const [university, setUniversity] = useState('');
+
   const [termsAgreed, setTermsAgreed] = useState(false);
 
   // Form Validation & Submission State
@@ -286,15 +293,6 @@ export function JobDetailPage({ jobId = '1', onBack }: JobDetailPageProps) {
     }
   };
 
-  // Toggle Previous Experience Checkbox
-  const togglePrevExp = (item: string) => {
-    if (prevExp.includes(item)) {
-      setPrevExp(prevExp.filter((i) => i !== item));
-    } else {
-      setPrevExp([...prevExp, item]);
-    }
-  };
-
   // Scroll to Apply Form
   const scrollToForm = () => {
     if (formRef.current) {
@@ -308,7 +306,7 @@ export function JobDetailPage({ jobId = '1', onBack }: JobDetailPageProps) {
     setErrorMessage('');
 
     if (!firstName.trim() || !lastName.trim()) {
-      setErrorMessage('Please enter your full name.');
+      setErrorMessage('Please enter your first and last name.');
       return;
     }
     if (!email.trim()) {
@@ -319,6 +317,26 @@ export function JobDetailPage({ jobId = '1', onBack }: JobDetailPageProps) {
       setErrorMessage('Please enter your phone number.');
       return;
     }
+    if (!city.trim()) {
+      setErrorMessage('Please enter your city.');
+      return;
+    }
+    if (!currentJobTitle.trim()) {
+      setErrorMessage('Please enter your current job title.');
+      return;
+    }
+    if (!totalYearsExperience.trim()) {
+      setErrorMessage('Please enter your total years of experience.');
+      return;
+    }
+    if (!qualification.trim()) {
+      setErrorMessage('Please enter your academic qualification.');
+      return;
+    }
+    if (!university.trim()) {
+      setErrorMessage('Please enter your university.');
+      return;
+    }
     if (!termsAgreed) {
       setErrorMessage('Please agree to the Terms & Conditions and Privacy Policy.');
       return;
@@ -327,17 +345,28 @@ export function JobDetailPage({ jobId = '1', onBack }: JobDetailPageProps) {
     setIsSubmitting(true);
 
     try {
+      const empStatusFinal = employmentStatus === 'Other'
+        ? (otherEmploymentStatus.trim() ? `Other: ${otherEmploymentStatus.trim()}` : 'Other')
+        : employmentStatus;
+
       const formData = new FormData();
       formData.append('firstName', firstName.trim());
       formData.append('lastName', lastName.trim());
       formData.append('email', email.trim());
       formData.append('phoneNumber', phone.trim());
       formData.append('country', country);
-      formData.append('currentCity', 'Remote / Hybrid');
-      formData.append('yearsOfExperience', expLevel === 'Beginner' ? '1' : expLevel === 'Intermediate' ? '3' : '5');
-      formData.append('primaryLanguage', primaryLang);
-      formData.append('additionalLanguage', additionalLangs);
+      formData.append('currentCity', city.trim());
+      formData.append('employmentStatus', empStatusFinal);
+      formData.append('currentJobTitle', currentJobTitle.trim());
+      formData.append('yearsOfExperience', totalYearsExperience.trim());
+      formData.append('currentSalary', currentSalary.trim());
+      formData.append('expectedSalary', expectedSalary.trim());
+      formData.append('academicQualification', qualification.trim());
+      formData.append('university', university.trim());
+      formData.append('primaryLanguage', 'English');
+      formData.append('additionalLanguage', 'Urdu');
       formData.append('jobId', job.id || job._id || jobId);
+
       if (file) {
         formData.append('resume', file);
       } else {
@@ -394,9 +423,9 @@ export function JobDetailPage({ jobId = '1', onBack }: JobDetailPageProps) {
 
   const jobTitle = jobData.jobTitle || jobData.title || 'Untitled Position';
   const companyName = jobData.companyName || jobData.company || 'Bucks & Bricks Co.';
-  const city = jobData.city || jobData.location || 'Pakistan';
+  const jobCity = jobData.city || jobData.location || 'Pakistan';
   const countryStr = jobData.country ? `, ${jobData.country}` : '';
-  const locationStr = `${city}${countryStr}`;
+  const locationStr = `${jobCity}${countryStr}`;
   const workplaceType = jobData.workplaceType || jobData.workType || 'On-Site';
   const employmentType = jobData.employmentType || 'Full Time';
   const description = jobData.description || 'No detailed description provided for this position.';
@@ -702,7 +731,7 @@ export function JobDetailPage({ jobId = '1', onBack }: JobDetailPageProps) {
                 </motion.button>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-5">
                 
                 {/* 1. Resume Upload Box */}
                 <div>
@@ -710,7 +739,7 @@ export function JobDetailPage({ jobId = '1', onBack }: JobDetailPageProps) {
                     Resume Upload
                   </label>
 
-                  <div className="relative border-2 border-dashed border-slate-200 hover:border-[#052842] bg-slate-50/50 hover:bg-blue-50/30 rounded-xl p-5 text-center transition-all cursor-pointer group">
+                  <div className="relative border-2 border-dashed border-slate-200 hover:border-[#052842] bg-slate-50/50 hover:bg-blue-50/30 rounded-xl p-4 text-center transition-all cursor-pointer group">
                     <input
                       type="file"
                       accept=".pdf,.doc,.docx"
@@ -744,13 +773,13 @@ export function JobDetailPage({ jobId = '1', onBack }: JobDetailPageProps) {
                       </div>
                     ) : (
                       <div className="flex flex-col items-center">
-                        <div className="p-2.5 bg-blue-50 text-[#052842] rounded-full mb-2 group-hover:scale-110 transition-transform">
-                          <UploadCloud size={20} />
+                        <div className="p-2 bg-blue-50 text-[#052842] rounded-full mb-1.5 group-hover:scale-110 transition-transform">
+                          <UploadCloud size={18} />
                         </div>
-                        <p className="text-xs text-slate-500 mb-2 font-sans">
-                          Upload your resume here to autofill key application fields
+                        <p className="text-xs text-slate-500 mb-1.5 font-sans">
+                          Upload your resume here
                         </p>
-                        <span className="inline-block bg-white border border-slate-200 shadow-sm text-xs font-semibold text-slate-700 px-4 py-1.5 rounded-lg group-hover:bg-[#052842] group-hover:text-white group-hover:border-[#052842] transition-colors">
+                        <span className="inline-block bg-white border border-slate-200 shadow-sm text-xs font-semibold text-slate-700 px-3.5 py-1 rounded-lg group-hover:bg-[#052842] group-hover:text-white group-hover:border-[#052842] transition-colors">
                           Choose File
                         </span>
                       </div>
@@ -840,54 +869,185 @@ export function JobDetailPage({ jobId = '1', onBack }: JobDetailPageProps) {
                         <ChevronDown size={14} className="absolute right-3 top-2.5 text-slate-400 pointer-events-none" />
                       </div>
                     </div>
+
+                    {/* City (appears below Country) */}
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                        City *
+                      </label>
+                      <input
+                        type="text"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        placeholder="e.g. Karachi, Lahore, Islamabad"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#052842] focus:bg-white transition-all"
+                      />
+                    </div>
                   </div>
                 </div>
 
-                {/* 3. Experience */}
+                {/* 3. Employment Information */}
                 <div>
                   <h3 className="text-xs font-bold uppercase tracking-wider text-[#011c30] mb-3 pb-1 border-b border-slate-100">
-                    Experience
+                    Employment Information
                   </h3>
 
                   <div className="space-y-3">
-                    <div>
-                      <label className="block text-[11px] font-semibold text-slate-600 mb-1">
-                        Primary Language Spoken *
+                    {/* Current Employment Status Radios */}
+                    <div className="bg-slate-50/70 border border-slate-200/80 rounded-xl p-3.5 space-y-2">
+                      <label className="block text-[11px] font-semibold text-slate-700 mb-2">
+                        Current Employment Status <span className="text-rose-500">*</span>
                       </label>
-                      <div className="relative">
-                        <select
-                          value={primaryLang}
-                          onChange={(e) => setPrimaryLang(e.target.value)}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#052842] focus:bg-white transition-all appearance-none cursor-pointer pr-8"
-                        >
-                          <option value="English">English</option>
-                          <option value="Urdu">Urdu</option>
-                          <option value="Arabic">Arabic</option>
-                          <option value="Spanish">Spanish</option>
-                        </select>
-                        <ChevronDown size={14} className="absolute right-3 top-2.5 text-slate-400 pointer-events-none" />
+                      <div className="space-y-2 text-xs text-slate-700">
+                        <label className="flex items-center gap-2 cursor-pointer select-none">
+                          <input
+                            type="radio"
+                            name="employmentStatus"
+                            value="Employed"
+                            checked={employmentStatus === 'Employed'}
+                            onChange={() => setEmploymentStatus('Employed')}
+                            className="text-[#052842] focus:ring-[#052842]"
+                          />
+                          <span>Employed</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer select-none">
+                          <input
+                            type="radio"
+                            name="employmentStatus"
+                            value="Unemployed"
+                            checked={employmentStatus === 'Unemployed'}
+                            onChange={() => setEmploymentStatus('Unemployed')}
+                            className="text-[#052842] focus:ring-[#052842]"
+                          />
+                          <span>Unemployed</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer select-none">
+                          <input
+                            type="radio"
+                            name="employmentStatus"
+                            value="Notice Period"
+                            checked={employmentStatus === 'Notice Period'}
+                            onChange={() => setEmploymentStatus('Notice Period')}
+                            className="text-[#052842] focus:ring-[#052842]"
+                          />
+                          <span>Notice Period</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer select-none">
+                          <input
+                            type="radio"
+                            name="employmentStatus"
+                            value="Other"
+                            checked={employmentStatus === 'Other'}
+                            onChange={() => setEmploymentStatus('Other')}
+                            className="text-[#052842] focus:ring-[#052842]"
+                          />
+                          <span>Other:</span>
+                        </label>
                       </div>
+                      {employmentStatus === 'Other' && (
+                        <div className="mt-2 pt-1">
+                          <input
+                            type="text"
+                            value={otherEmploymentStatus}
+                            onChange={(e) => setOtherEmploymentStatus(e.target.value)}
+                            placeholder="Please specify details..."
+                            className="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#052842]"
+                          />
+                        </div>
+                      )}
                     </div>
 
+                    {/* Current Job Title */}
                     <div>
                       <label className="block text-[11px] font-semibold text-slate-600 mb-1">
-                        Additional Languages
+                        Current Job Title <span className="text-rose-500">*</span>
                       </label>
-                      <div className="relative">
-                        <select
-                          value={additionalLangs}
-                          onChange={(e) => setAdditionalLangs(e.target.value)}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#052842] focus:bg-white transition-all appearance-none cursor-pointer pr-8"
-                        >
-                          <option value="Urdu">Urdu</option>
-                          <option value="English">English</option>
-                          <option value="Arabic">Arabic</option>
-                          <option value="Punjabi">Punjabi</option>
-                          <option value="Sindhi">Sindhi</option>
-                          <option value="None">None</option>
-                        </select>
-                        <ChevronDown size={14} className="absolute right-3 top-2.5 text-slate-400 pointer-events-none" />
-                      </div>
+                      <input
+                        type="text"
+                        value={currentJobTitle}
+                        onChange={(e) => setCurrentJobTitle(e.target.value)}
+                        placeholder="Your answer"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#052842] focus:bg-white transition-all"
+                      />
+                    </div>
+
+                    {/* Total Years of Experience */}
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                        Total Years of Experience <span className="text-rose-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={totalYearsExperience}
+                        onChange={(e) => setTotalYearsExperience(e.target.value)}
+                        placeholder="Your answer"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#052842] focus:bg-white transition-all"
+                      />
+                    </div>
+
+                    {/* Current Salary (Optional) */}
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                        Current Salary (Optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={currentSalary}
+                        onChange={(e) => setCurrentSalary(e.target.value)}
+                        placeholder="Your answer"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#052842] focus:bg-white transition-all"
+                      />
+                    </div>
+
+                    {/* Expected Salary (Optional) */}
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                        Expected Salary (Optional)
+                      </label>
+                      <input
+                        type="text"
+                        value={expectedSalary}
+                        onChange={(e) => setExpectedSalary(e.target.value)}
+                        placeholder="Your answer"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#052842] focus:bg-white transition-all"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* 4. Academic Information */}
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#011c30] mb-3 pb-1 border-b border-slate-100">
+                    Academic Information
+                  </h3>
+
+                  <div className="space-y-3">
+                    {/* Qualification */}
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                        Qualification <span className="text-rose-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={qualification}
+                        onChange={(e) => setQualification(e.target.value)}
+                        placeholder="Your answer"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#052842] focus:bg-white transition-all"
+                      />
+                    </div>
+
+                    {/* University */}
+                    <div>
+                      <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                        University <span className="text-rose-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={university}
+                        onChange={(e) => setUniversity(e.target.value)}
+                        placeholder="Your answer"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#052842] focus:bg-white transition-all"
+                      />
                     </div>
                   </div>
                 </div>
@@ -926,7 +1086,7 @@ export function JobDetailPage({ jobId = '1', onBack }: JobDetailPageProps) {
                   whileHover={{ scale: 1.02, y: -1 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ duration: 0.25, ease: 'easeOut' }}
-                  className="w-full bg-[#052842] hover:bg-white hover:text-[#052842] border border-[#052842] text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-200 shadow-md text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="w-full bg-[#052842] hover:bg-white hover:text-[#052842] border border-[#052842] text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 shadow-md text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <span className="inline-block animate-pulse">Submitting Application...</span>

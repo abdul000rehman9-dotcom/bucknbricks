@@ -57,18 +57,6 @@ export function ServiceDetailsPage({ serviceType }: ServiceDetailsPageProps) {
       detailImg = executiveSearchDetailImg;
       contentGroups = [
         {
-          groupTitle: 'Positions We Recruit',
-          items: [
-            'Chief Executive Officers (CEO)',
-            'Chief Financial Officers (CFO)',
-            'Chief Operating Officers (COO)',
-            'Chief Human Resources Officers (CHRO)',
-            'Directors',
-            'General Managers',
-            'Functional Heads',
-          ],
-        },
-        {
           groupTitle: 'Why Our Executive Search?',
           items: [
             'Confidential Hiring',
@@ -89,19 +77,15 @@ export function ServiceDetailsPage({ serviceType }: ServiceDetailsPageProps) {
       detailImg = recruitmentSolutionDetailImg;
       contentGroups = [
         {
-          groupTitle: 'Industries We Serve',
+          groupTitle: 'Positions We Recruit',
           items: [
-            'FMCG',
-            'Manufacturing',
-            'Pharmaceuticals',
-            'Information Technology',
-            'Automotive',
-            'Healthcare',
-            'Banking',
-            'Retail',
-            'Hospitality',
-            'Logistics',
-            'Engineering',
+            'Chief Executive Officers (CEO)',
+            'Chief Financial Officers (CFO)',
+            'Chief Operating Officers (COO)',
+            'Chief Human Resources Officers (CHRO)',
+            'Directors',
+            'General Managers',
+            'Functional Heads',
           ],
         },
       ];
