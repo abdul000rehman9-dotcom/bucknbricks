@@ -27,7 +27,7 @@ export function AboutPage() {
   }, []);
 
   return (
-    <div id="about" className="pt-24 pb-12 bg-[#fcfbfa]">
+    <div id="about" className="pt-24 pb-12 bg-[#f8fafc]">
       {/* 1. Hero Section of the About Us Page */}
       <section id="about-hero" className="max-w-7xl mx-auto px-6 py-12 md:py-16 text-center relative overflow-hidden">
         {/* Subtle grid pattern background */}
@@ -134,7 +134,7 @@ export function AboutPage() {
       </section>
 
       {/* 3. Our Mission & Our Vision Section */}
-      <section id="about-pillars" className="relative py-16 sm:py-24 bg-[#fcfbfa] overflow-hidden">
+      <section id="about-pillars" className="relative py-16 sm:py-24 bg-[#f8fafc] overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           {/* Centered Heading */}
           <div className="mb-16 text-center max-w-3xl mx-auto">

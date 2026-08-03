@@ -210,7 +210,7 @@ export function OurImpactPage() {
   };
 
   return (
-    <div className="bg-[#fcfbfa]">
+    <div className="bg-[#f8fafc]">
       {/* 1. Hero Section */}
       <section className="pt-32 pb-16 max-w-7xl mx-auto px-6 text-center overflow-hidden">
         <div className="max-w-4xl mx-auto flex flex-col items-center">
@@ -354,7 +354,7 @@ export function OurImpactPage() {
       {/* 4. Our Value Section - FIXED ENTRY ANIMATION + ALL 5 CARDS GUARANTEED */}
       <section
         ref={valuesSectionRef}
-        className="py-20 sm:py-28 bg-[#fcfbfa] relative overflow-visible border-t border-slate-100/80"
+        className="py-20 sm:py-28 bg-[#f8fafc] relative overflow-visible border-t border-slate-100/80"
       >
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-6 flex justify-center w-full">

@@ -128,7 +128,7 @@ export function JourneyTimeline() {
   });
 
   return (
-    <section id="journey" className="relative py-20 sm:py-28 bg-[#fcfbfa] overflow-hidden w-full">
+    <section id="journey" className="relative py-20 sm:py-28 bg-[#f8fafc] overflow-hidden w-full">
       {/* Mobile Modal Overlay (Rendered at top-level outside transformed parent to ensure 100% sharp focus & scrollability) */}
       <AnimatePresence>
         {activeMilestoneData && (

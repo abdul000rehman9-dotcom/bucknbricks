@@ -151,7 +151,7 @@ export function BlogPage() {
   const latestInsights = PDF_BLOG_POSTS;
 
   return (
-    <div className="pt-24 pb-12 bg-[#fcfbfa]">
+    <div className="pt-24 pb-12 bg-[#f8fafc]">
       {/* 1. Our Blogs - Title & Featured Hero Card */}
       <section className="max-w-7xl mx-auto px-6 pt-12 pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808003_1px,transparent_1px),linear-gradient(to_bottom,#80808003_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none" />

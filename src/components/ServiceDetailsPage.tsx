@@ -146,7 +146,7 @@ export function ServiceDetailsPage({ serviceType }: ServiceDetailsPageProps) {
   }
 
   return (
-    <div className="pt-24 pb-12 bg-[#fcfbfa]">
+    <div className="pt-24 pb-12 bg-[#f8fafc]">
       {/* Top Hero Section */}
       <section className="max-w-7xl mx-auto px-6 py-10 md:py-16 text-center relative overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808005_1px,transparent_1px),linear-gradient(to_bottom,#80808005_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none" />
@@ -183,7 +183,7 @@ export function ServiceDetailsPage({ serviceType }: ServiceDetailsPageProps) {
       </section>
 
       {/* Existing Layout Split Section (Image on Left, Content on Right) */}
-      <section className="relative py-16 sm:py-24 bg-[#fcfbfa] overflow-hidden border-t border-b border-slate-100">
+      <section className="relative py-16 sm:py-24 bg-[#f8fafc] overflow-hidden border-t border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Left Image */}

@@ -6,7 +6,7 @@ import { Contact } from './Contact';
 import { JourneyTimeline } from './JourneyTimeline';
 import { AnimatedHeading, AnimatedParagraph, AnimatedButton } from './animations';
 
-const professionalHandshake = '/assets/Ceo.jpg';
+const professionalHandshake = '/assets/Ceo.jpeg';
 const digitalWorkplace = '/assets/Our_vision.jpg';
 
 // Smooth spring animation config for luxury feel

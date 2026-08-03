@@ -93,7 +93,7 @@ export function Footer({ onPageChange }: FooterProps) {
 
           {/* Column 2: Quick Links (2-subcolumn list with '>' arrows) */}
           <div className="lg:col-span-4 flex flex-col items-start px-0 lg:px-6 lg:border-r lg:border-slate-800/60">
-            <h4 className="text-white font-bold font-display text-sm tracking-wide mb-5">
+            <h4 className="font-bold font-display text-sm tracking-wide mb-5" style={{ color: '#89C7F5' }}>
               Quick Links
             </h4>
             <div className="grid grid-cols-2 gap-x-6 gap-y-3 w-full">
@@ -133,7 +133,7 @@ export function Footer({ onPageChange }: FooterProps) {
 
           {/* Column 3: Connect With Us */}
           <div className="lg:col-span-2.5 lg:col-span-3 flex flex-col items-start px-0 lg:px-6 lg:border-r lg:border-slate-800/60">
-            <h4 className="text-white font-bold font-display text-sm tracking-wide mb-5">
+            <h4 className="font-bold font-display text-sm tracking-wide mb-5" style={{ color: '#89C7F5' }}>
               Connect With Us
             </h4>
             
@@ -159,7 +159,7 @@ export function Footer({ onPageChange }: FooterProps) {
 
           {/* Column 4: Get in Touch */}
           <div className="lg:col-span-2.5 lg:col-span-2 flex flex-col items-start pl-0 lg:pl-6">
-            <h4 className="text-white font-bold font-display text-sm tracking-wide mb-5">
+            <h4 className="font-bold font-display text-sm tracking-wide mb-5" style={{ color: '#89C7F5' }}>
               Get in Touch
             </h4>
             <ul className="flex flex-col gap-3.5 text-xs sm:text-sm text-slate-300">
