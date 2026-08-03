@@ -243,7 +243,7 @@ export function JourneyTimeline() {
               <img
                 src={journeyImg}
                 alt="Our Journey"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-fit"
               />
             </div>
           </div>
