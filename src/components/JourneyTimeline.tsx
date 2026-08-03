@@ -1,13 +1,9 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { AnimatedButton } from './animations';
+
 const logoImg = '/assets/logo-main.png';
+const journeyImg = '/assets/journey.jpeg'; 
 
 interface YearDetail {
   year: string;
@@ -83,7 +79,6 @@ export function JourneyTimeline() {
   const activeMilestoneData = milestones.find((m) => m.id === activeMilestone);
   const activeIdx = milestones.findIndex((m) => m.id === activeMilestone);
 
-  // Perfectly smooth, mathematically continuous cubic bezier spline path matching the image
   const svgPath = 'M 100 320 C 130 350, 160 380, 200 380 C 250 380, 320 260, 370 260 C 420 260, 470 310, 515 310 C 580 310, 660 120, 730 120 C 780 120, 850 120, 920 120';
 
   const containerVariants = {
@@ -128,12 +123,11 @@ export function JourneyTimeline() {
   });
 
   return (
-    <section id="journey" className="relative py-20 sm:py-28 bg-[#f8fafc] overflow-hidden w-full">
-      {/* Mobile Modal Overlay (Rendered at top-level outside transformed parent to ensure 100% sharp focus & scrollability) */}
+    <section id="journey" className="relative py-16 sm:py-24 bg-[#f8fafc] overflow-hidden w-full">
+      {/* Mobile Modal Overlay */}
       <AnimatePresence>
         {activeMilestoneData && (
-          <div className="sm:hidden fixed inset-0 z-[99998] flex items-center justify-center p-4">
-            {/* Background Backdrop Blur */}
+          <div className="lg:hidden fixed inset-0 z-[99998] flex items-center justify-center p-4">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -142,7 +136,6 @@ export function JourneyTimeline() {
               onClick={() => setActiveMilestone(null)}
             />
 
-            {/* Sharp, Clear, Unblurred Card */}
             <motion.div
               initial={{ opacity: 0, scale: 0.92, y: 16 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -170,7 +163,6 @@ export function JourneyTimeline() {
                 </div>
               </div>
 
-              {/* Scrollable Container for Full Year Details */}
               <div className="overflow-y-auto pr-1 space-y-3.5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed font-sans scrollbar-thin scrollbar-thumb-slate-300 touch-pan-y max-h-[52vh] flex-1">
                 {activeMilestoneData.yearDetails.map((detail, index) => (
                   <div key={index} className="flex flex-col gap-1 border-l-2 border-blue-500/40 pl-3 py-1 bg-slate-50/60 rounded-r-lg">
@@ -183,7 +175,6 @@ export function JourneyTimeline() {
                 ))}
               </div>
 
-              {/* Bottom Navigation Arrows */}
               <div className="flex items-center justify-between pt-3 mt-3 border-t border-slate-100 shrink-0 select-none">
                 {activeIdx > 0 ? (
                   <button
@@ -227,44 +218,39 @@ export function JourneyTimeline() {
       </AnimatePresence>
 
       <div className="max-w-7xl mx-auto px-6 relative">
-        
-        {/* Main Wrapper: Full Width Responsive Canvas */}
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{ once: true, amount: 0.1 }}
           variants={containerVariants}
-          className="relative w-full flex flex-col lg:block"
+          className="relative w-full"
         >
-          
-          {/* 1. Left-Side Intro Content */}
-          <div className="relative lg:absolute lg:left-0 lg:top-0 z-30 max-w-sm flex flex-col items-start text-left pointer-events-auto mb-8 lg:mb-0">
-            <motion.span
-              variants={fadeInUp}
-              className="text-[10px] font-bold text-blue-600 uppercase tracking-widest font-sans mb-3 bg-blue-50 px-3 py-1 rounded-md"
-            >
-              Our Story
-            </motion.span>
+          {/* Mobile and Tablet Header Layout (Side by Side) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center mb-8 lg:hidden">
+            <div className="flex flex-col items-start text-left">
+              <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest font-sans mb-2 bg-blue-50 px-3 py-1 rounded-md">
+                Our Story
+              </span>
+              <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-[#011c30] tracking-tight mb-2">
+                Our Journey
+              </h2>
+              <p className="text-slate-600 font-sans text-xs sm:text-sm leading-relaxed">
+                Every successful business starts with a vision. Ours began with a simple belief, that the right people have the power to transform organizations. What started as a small recruitment initiative has evolved into a trusted Talent Management Solutions partner serving businesses across Pakistan and international markets.
+              </p>
+            </div>
 
-            {/* Main Heading & Subheading */}
-            <motion.h2
-              variants={fadeInUp}
-              className="font-display font-extrabold text-3xl sm:text-4xl text-[#011c30] tracking-tight mb-2"
-            >
-              Our Journey
-            </motion.h2>
-
-            <motion.p
-              variants={fadeInUp}
-              className="text-slate-600 font-sans text-xs lg:text-sm leading-relaxed mb-8"
-            >
-              Every successful business starts with a vision. Ours began with a simple belief, that the right people have the power to transform organizations. What started as a small recruitment initiative has evolved into a trusted Talent Management Solutions partner serving businesses across Pakistan and international markets. Every milestone reflects our commitment to building lasting relationships, delivering exceptional talent, and creating meaningful business impact.
-            </motion.p>
+            <div className="w-full h-44 sm:h-56 rounded-xl overflow-hidden shadow-sm border border-slate-200/80">
+              <img
+                src={journeyImg}
+                alt="Our Journey"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
 
-          {/* 2. Timeline Canvas Container */}
-          <div className="relative w-full aspect-[1000/550] min-h-[420px] sm:min-h-[500px] lg:min-h-[550px]">
-            {/* Full-Width SVG S-Wave Timeline Grid */}
+          {/* Timeline Container */}
+          <div className="relative w-full aspect-[1000/550] min-h-[380px] sm:min-h-[480px] lg:min-h-[550px]">
+            {/* SVG Wave Line */}
             <div className="absolute inset-0 pointer-events-none z-10 w-full h-full">
               <svg className="w-full h-full overflow-visible" viewBox="0 0 1000 520" fill="none" preserveAspectRatio="none">
                 <defs>
@@ -292,7 +278,44 @@ export function JourneyTimeline() {
               </svg>
             </div>
 
-            {/* Giant Background Decorative Numbers */}
+            {/* Desktop Only Text Header (Absolute Positioned over SVG) */}
+            <div className="hidden lg:flex absolute left-0 top-0 z-30 max-w-sm flex-col items-start text-left pointer-events-auto">
+              <motion.span
+                variants={fadeInUp}
+                className="text-[10px] font-bold text-blue-600 uppercase tracking-widest font-sans mb-3 bg-blue-50 px-3 py-1 rounded-md"
+              >
+                Our Story
+              </motion.span>
+
+              <motion.h2
+                variants={fadeInUp}
+                className="font-display font-extrabold text-3xl sm:text-4xl text-[#011c30] tracking-tight mb-2"
+              >
+                Our Journey
+              </motion.h2>
+
+              <motion.p
+                variants={fadeInUp}
+                className="text-slate-600 font-sans text-xs lg:text-sm leading-relaxed mb-4 lg:mb-8"
+              >
+                Every successful business starts with a vision. Ours began with a simple belief, that the right people have the power to transform organizations. What started as a small recruitment initiative has evolved into a trusted Talent Management Solutions partner serving businesses across Pakistan and international markets. Every milestone reflects our commitment to building lasting relationships, delivering exceptional talent, and creating meaningful business impact.
+              </motion.p>
+            </div>
+
+            {/* Desktop Only Bottom Image */}
+            <motion.div
+              variants={fadeInUp}
+              style={{ left: '63%', top: '48%', width: '35%', height: '48%' }}
+              className="hidden lg:block absolute z-10 pointer-events-auto rounded-2xl overflow-hidden shadow-lg border border-slate-200/60 bg-white"
+            >
+              <img
+                src={journeyImg}
+                alt="Journey Illustration"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+
+            {/* Numbers */}
             <motion.div
               variants={bgNumVariants(1.0)}
               style={{ left: '30%', top: '75%' }}
@@ -317,19 +340,19 @@ export function JourneyTimeline() {
               3
             </motion.div>
 
-            {/* 1. 2009 Milestone Node */}
+            {/* Node 1 */}
             <div
               style={{ left: '20%', top: '73.08%' }}
               className={`absolute flex flex-col items-start -ml-[22px] -mt-[22px] pointer-events-auto transition-all ${
                 activeMilestone === '1' ? 'z-[9999]' : 'z-20'
               }`}
               onMouseEnter={() => {
-                if (typeof window !== 'undefined' && window.innerWidth >= 640) {
+                if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
                   setActiveMilestone('1');
                 }
               }}
               onMouseLeave={() => {
-                if (typeof window !== 'undefined' && window.innerWidth >= 640) {
+                if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
                   if (activeMilestone === '1') setActiveMilestone(null);
                 }
               }}
@@ -353,7 +376,6 @@ export function JourneyTimeline() {
                   }`} />
                 </motion.button>
 
-                {/* Desktop Inline Popover */}
                 <AnimatePresence>
                   {activeMilestone === '1' && (
                     <motion.div
@@ -361,7 +383,7 @@ export function JourneyTimeline() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -8, scale: 0.95 }}
                       transition={{ duration: 0.2, ease: 'easeOut' }}
-                      className="hidden sm:block absolute left-1/2 transform -translate-x-1/2 z-[9999] bg-white border border-slate-200/90 shadow-2xl p-5 rounded-2xl w-[400px] bottom-16 text-left"
+                      className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 z-[9999] bg-white border border-slate-200/90 shadow-2xl p-5 rounded-2xl w-[400px] bottom-16 text-left"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white border-r border-b border-slate-200 rotate-45 -bottom-1.5" />
@@ -383,7 +405,6 @@ export function JourneyTimeline() {
                         </div>
                       </div>
 
-                      {/* Scrollable Container for Full Content */}
                       <div className="max-h-[250px] overflow-y-auto pr-2 space-y-3.5 pt-1 text-sm text-slate-600 leading-relaxed font-sans scrollbar-thin scrollbar-thumb-slate-300">
                         {milestones[0].yearDetails.map((detail, index) => (
                           <div key={index} className="flex flex-col gap-1 border-l-2 border-blue-500/30 pl-3 py-0.5">
@@ -396,7 +417,6 @@ export function JourneyTimeline() {
                         ))}
                       </div>
 
-                      {/* Desktop Bottom Navigation Footer */}
                       <div className="flex items-center justify-between pt-3 mt-3 border-t border-slate-100 shrink-0 select-none">
                         {activeIdx > 0 ? (
                           <button
@@ -405,7 +425,6 @@ export function JourneyTimeline() {
                               setActiveMilestone(milestones[activeIdx - 1].id);
                             }}
                             className="flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer group"
-                            aria-label="Previous milestone card"
                           >
                             <ChevronLeft size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
                             <span>{milestones[activeIdx - 1].year}</span>
@@ -425,7 +444,6 @@ export function JourneyTimeline() {
                               setActiveMilestone(milestones[activeIdx + 1].id);
                             }}
                             className="flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer group"
-                            aria-label="Next milestone card"
                           >
                             <span>{milestones[activeIdx + 1].year}</span>
                             <ChevronRight size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
@@ -455,19 +473,19 @@ export function JourneyTimeline() {
               </motion.div>
             </div>
 
-            {/* 2. 2015 Milestone Node */}
+            {/* Node 2 */}
             <div
               style={{ left: '51.5%', top: '59.62%' }}
               className={`absolute flex flex-col items-start -ml-[22px] -mt-[22px] pointer-events-auto transition-all ${
                 activeMilestone === '2' ? 'z-[9999]' : 'z-20'
               }`}
               onMouseEnter={() => {
-                if (typeof window !== 'undefined' && window.innerWidth >= 640) {
+                if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
                   setActiveMilestone('2');
                 }
               }}
               onMouseLeave={() => {
-                if (typeof window !== 'undefined' && window.innerWidth >= 640) {
+                if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
                   if (activeMilestone === '2') setActiveMilestone(null);
                 }
               }}
@@ -491,7 +509,6 @@ export function JourneyTimeline() {
                   }`} />
                 </motion.button>
 
-                {/* Desktop Inline Popover */}
                 <AnimatePresence>
                   {activeMilestone === '2' && (
                     <motion.div
@@ -499,7 +516,7 @@ export function JourneyTimeline() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: -8, scale: 0.95 }}
                       transition={{ duration: 0.2, ease: 'easeOut' }}
-                      className="hidden sm:block absolute left-1/2 transform -translate-x-1/2 z-[9999] bg-white border border-slate-200/90 shadow-2xl p-5 rounded-2xl w-[400px] bottom-16 text-left"
+                      className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 z-[9999] bg-white border border-slate-200/90 shadow-2xl p-5 rounded-2xl w-[400px] bottom-16 text-left"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white border-r border-b border-slate-200 rotate-45 -bottom-1.5" />
@@ -521,7 +538,6 @@ export function JourneyTimeline() {
                         </div>
                       </div>
 
-                      {/* Scrollable Container for Full Content */}
                       <div className="max-h-[250px] overflow-y-auto pr-2 space-y-3.5 pt-1 text-sm text-slate-600 leading-relaxed font-sans scrollbar-thin scrollbar-thumb-slate-300">
                         {milestones[1].yearDetails.map((detail, index) => (
                           <div key={index} className="flex flex-col gap-1 border-l-2 border-blue-500/30 pl-3 py-0.5">
@@ -534,7 +550,6 @@ export function JourneyTimeline() {
                         ))}
                       </div>
 
-                      {/* Desktop Bottom Navigation Footer */}
                       <div className="flex items-center justify-between pt-3 mt-3 border-t border-slate-100 shrink-0 select-none">
                         {activeIdx > 0 ? (
                           <button
@@ -543,7 +558,6 @@ export function JourneyTimeline() {
                               setActiveMilestone(milestones[activeIdx - 1].id);
                             }}
                             className="flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer group"
-                            aria-label="Previous milestone card"
                           >
                             <ChevronLeft size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
                             <span>{milestones[activeIdx - 1].year}</span>
@@ -563,7 +577,6 @@ export function JourneyTimeline() {
                               setActiveMilestone(milestones[activeIdx + 1].id);
                             }}
                             className="flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer group"
-                            aria-label="Next milestone card"
                           >
                             <span>{milestones[activeIdx + 1].year}</span>
                             <ChevronRight size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
@@ -593,19 +606,19 @@ export function JourneyTimeline() {
               </motion.div>
             </div>
 
-            {/* 3. 2026 Milestone Node */}
+            {/* Node 3 */}
             <div
               style={{ left: '73%', top: '23.08%' }}
               className={`absolute flex flex-col items-start -ml-[22px] -mt-[22px] pointer-events-auto transition-all ${
                 activeMilestone === '3' ? 'z-[9999]' : 'z-20'
               }`}
               onMouseEnter={() => {
-                if (typeof window !== 'undefined' && window.innerWidth >= 640) {
+                if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
                   setActiveMilestone('3');
                 }
               }}
               onMouseLeave={() => {
-                if (typeof window !== 'undefined' && window.innerWidth >= 640) {
+                if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
                   if (activeMilestone === '3') setActiveMilestone(null);
                 }
               }}
@@ -629,7 +642,6 @@ export function JourneyTimeline() {
                   }`} />
                 </motion.button>
 
-                {/* Desktop Inline Popover */}
                 <AnimatePresence>
                   {activeMilestone === '3' && (
                     <motion.div
@@ -637,7 +649,7 @@ export function JourneyTimeline() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.95 }}
                       transition={{ duration: 0.2, ease: 'easeOut' }}
-                      className="hidden sm:block absolute left-1/2 transform -translate-x-1/2 z-[9999] bg-white border border-slate-200/90 shadow-2xl p-5 rounded-2xl w-[400px] top-16 text-left"
+                      className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 z-[9999] bg-white border border-slate-200/90 shadow-2xl p-5 rounded-2xl w-[400px] top-16 text-left"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <div className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-200 rotate-45 -top-1.5" />
@@ -659,7 +671,6 @@ export function JourneyTimeline() {
                         </div>
                       </div>
 
-                      {/* Scrollable Container for Full Content */}
                       <div className="max-h-[250px] overflow-y-auto pr-2 space-y-3.5 pt-1 text-sm text-slate-600 leading-relaxed font-sans scrollbar-thin scrollbar-thumb-slate-300">
                         {milestones[2].yearDetails.map((detail, index) => (
                           <div key={index} className="flex flex-col gap-1 border-l-2 border-blue-500/30 pl-3 py-0.5">
@@ -672,7 +683,6 @@ export function JourneyTimeline() {
                         ))}
                       </div>
 
-                      {/* Desktop Bottom Navigation Footer */}
                       <div className="flex items-center justify-between pt-3 mt-3 border-t border-slate-100 shrink-0 select-none">
                         {activeIdx > 0 ? (
                           <button
@@ -681,7 +691,6 @@ export function JourneyTimeline() {
                               setActiveMilestone(milestones[activeIdx - 1].id);
                             }}
                             className="flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer group"
-                            aria-label="Previous milestone card"
                           >
                             <ChevronLeft size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
                             <span>{milestones[activeIdx - 1].year}</span>
@@ -701,7 +710,6 @@ export function JourneyTimeline() {
                               setActiveMilestone(milestones[activeIdx + 1].id);
                             }}
                             className="flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-blue-50 px-3 py-1.5 rounded-lg transition-colors cursor-pointer group"
-                            aria-label="Next milestone card"
                           >
                             <span>{milestones[activeIdx + 1].year}</span>
                             <ChevronRight size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
@@ -731,7 +739,6 @@ export function JourneyTimeline() {
               </motion.div>
             </div>
           </div>
-
         </motion.div>
       </div>
     </section>
